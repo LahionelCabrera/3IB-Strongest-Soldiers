@@ -1,0 +1,19 @@
+/* Forza l'intera pagina a occupare il 100% dell'altezza dello schermo */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Definiamo l'altezza vh-100 per il contenitore principale */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#Box1, #Box2, #BoxCripto {
+    flex: 1; /* Ogni box occupa lo stesso spazio */
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc; /* Aggiunge un bordo per distinguere i box */
+    overflow-y: scroll; /* Aggiunge una barra di scorrimento verticale se il contenuto è troppo lungo */
+}
