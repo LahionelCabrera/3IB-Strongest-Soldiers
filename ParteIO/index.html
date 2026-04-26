@@ -54,31 +54,26 @@
           <div class="col-4">
             <div class="row">
               <div class="form-floating col-6">
-                <select
-                  class="form-select"
-                  id="floatingSelect"
-                  aria-label="Floating label select example"
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3" selected>3</option>
-                </select>
-                <label style="left: 0.5em" for="floatingSelect">Key</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="KeyVigenere"
+                  placeholder="Chiave"
+                  value="CHIAVE"
+                />
+                <label style="left: 0.5em" for="KeyVigenere">Key</label>
               </div>
 
               <div
                 class="form-check form-switch d-flex flex-column align-items-center text-center col-6 w-auto p-0"
               >
-                <label
-                  class="form-check-label mb-2"
-                  for="flexSwitchCheckDefault"
-                >
+                <label class="form-check-label mb-2" for="CheckVigenere">
                   Vigenére
                 </label>
                 <input
                   class="form-check-input ms-0"
                   type="checkbox"
-                  id="flexSwitchCheckDefault"
+                  id="CheckVigenere"
                 />
               </div>
             </div>
@@ -152,9 +147,7 @@
         <div
           class="col-2 bg-secondary d-flex align-items-center justify-content-center"
           id="BoxCripto"
-        >
-        
-        </div>
+        ></div>
 
         <div
           class="col-5 bg-success rounded-start d-flex flex-column"
