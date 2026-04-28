@@ -9,7 +9,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-
+div.slot {
+    border-top: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: darkturquoise;
+}
 #Box1, #Box2, #BoxCripto {
     flex: 1; /* Ogni box occupa lo stesso spazio */
     padding: 20px;
