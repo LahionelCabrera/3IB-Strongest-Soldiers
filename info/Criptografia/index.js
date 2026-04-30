@@ -103,3 +103,7 @@ function Cripto(btn, mittente, destinatario) {
 
   document.getElementById(Mittente).value = "";
 }
+
+funtion StampaSlot(){
+  clone = document.getElementsByTagName("Template")
+}
