@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Tris della Classe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Tris ❌⭕</h1>
+    
+    <h2 id="messaggio">Tocca al giocatore X</h2>
+
+    <p>Tempo perso a giocare: <span id="timer">0</span> secondi.</p>
+
+    <div id="griglia">
+        <button class="cella" onclick="faiMossa(0)"></button>
+        <button class="cella" onclick="faiMossa(1)"></button>
+        <button class="cella" onclick="faiMossa(2)"></button>
+        <button class="cella" onclick="faiMossa(3)"></button>
+        <button class="cella" onclick="faiMossa(4)"></button>
+        <button class="cella" onclick="faiMossa(5)"></button>
+        <button class="cella" onclick="faiMossa(6)"></button>
+        <button class="cella" onclick="faiMossa(7)"></button>
+        <button class="cella" onclick="faiMossa(8)"></button>
+    </div>
+
+    <br>
+    <button id="bottoneReset">Ricomincia la partita</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
