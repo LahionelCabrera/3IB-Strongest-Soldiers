@@ -64,7 +64,7 @@ function controllaVittoria() {
         let c = statoTabellone[comb[2]];
 
         if (a != "" && a == b && b == c) {
-            testoMessaggio.innerText = "VITTORIA del giocatore: " + a +;
+            testoMessaggio.innerText = "VITTORIA del giocatore: " + a;
             giocoFinito = true;
             return; // esce dalla funzione
         }
