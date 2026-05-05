@@ -59,7 +59,7 @@ function controllaVittoria() {
 
     for (let i = 0; i < combinazioniVincita.length; i++) {
         let comb = combinazioniVincita[i];
-        let a = statoTabellone[comb[0]];
+        let a = statoTabellone[comb[0]]; 
         let b = statoTabellone[comb[1]];
         let c = statoTabellone[comb[2]];
 
