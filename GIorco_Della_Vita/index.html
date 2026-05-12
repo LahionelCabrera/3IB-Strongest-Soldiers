@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-4 p-4">
+            <div class="form">
+                <label for="customRange3" class="form-label">Righe</label>
+                <input type="range" class="form-range" min="3" max="20" step="1" id="customRange1"
+                    onpointermove="StampaValoreRange(this,'Righe')">
+                <input type="text" class="form-control mb-2" id="Righe" placeholder="Righe" disabled>
+            </div>
+            <div class="form">
+                <label for="customRange3" class="form-label">Colonne</label>
+                <input type="range" class="form-range" min="3" max="20" step="1" id="customRange2"
+                    onpointermove="StampaValoreRange(this,'Colonne')">
+                <input type="text" class="form-control mb-2" id="Colonne" placeholder="Colonne" disabled>
+            </div>
+            <input type="button" value="Genera" class="btn btn-primary" id="Genera">
+        </div>
+
+        <div class="col-8" id="destination">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
