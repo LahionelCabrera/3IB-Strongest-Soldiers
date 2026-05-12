@@ -1,6 +1,6 @@
 const palla = document.getElementById("palla");
 const container = document.getElementById("container");
-const numTriangolari = document.getElementById("InputNumero").value;
+const num = document.getElementById("InputNumero");
 
 
 function StampaPalle(numero) {
