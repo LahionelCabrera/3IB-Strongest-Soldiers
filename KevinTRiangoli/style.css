@@ -1,0 +1,29 @@
+.palla {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: red;
+  animation: move 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+#main {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+body,
+html {
+  margin: 0;
+}
+
+@keyframes move {
+  from {
+    transform: translateY(-100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
