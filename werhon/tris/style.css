@@ -1,0 +1,152 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-color: #38bdf8;
+    --text-color: #f8fafc;
+    --cella-size: 100px;
+}
+
+body {
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.layout-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; 
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    gap: 30px;
+}
+
+.side-block {
+    display: flex;
+    justify-content: flex-start; /* Il punteggio si allinea all'inizio del blocco destro */
+}
+
+.center-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.scacchiera {
+    display: grid;
+    grid-template-columns: repeat(3, var(--cella-size));
+    grid-template-rows: repeat(3, var(--cella-size));
+    gap: 15px;
+}
+
+/* Stile Punteggio */
+.score-board {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 180px;
+    backdrop-filter: blur(10px);
+}
+
+.score-board h3 {
+    margin: 0 0 15px 0;
+    color: var(--accent-color);
+    font-size: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 10px;
+}
+
+.player-score {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+#punteggio_X, #punteggio_O {
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-left: 15px;
+}
+
+/* Celle e Animazioni */
+.cella {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cella:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+}
+
+.cella:not(:empty) {
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.info {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    min-height: 1.5rem;
+}
+
+button {
+    background: var(--accent-color);
+    color: #0f172a;
+    border: none;
+    padding: 12px 30px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: transform 0.2s;
+}
+
+button:hover { transform: scale(1.05); }
+
+/* Mobile: mette tutto in colonna se lo schermo è piccolo */
+@media (max-width: 800px) {
+    .layout-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .side-block {
+        justify-content: center;
+        order: 2; /* Punteggio sotto in mobile */
+    }
+    .center-block {
+        order: 1;
+    }
+}
