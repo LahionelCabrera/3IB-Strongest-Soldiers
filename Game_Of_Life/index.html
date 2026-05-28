@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game of Life</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Game of Life</h1>
+    
+    <div class="controlli">
+        <label>Righe: <input type="number" id="righe" value="20" min="5" max="50"></label>
+        <label>Colonne: <input type="number" id="colonne" value="30" min="5" max="50"></label>
+        <button onclick="creaGriglia()">Crea Griglia</button>
+        <br>
+        <button onclick="start()">▶ Start</button>
+        <button onclick="stop()">⏹ Stop</button>
+        <button onclick="reset()">↺ Reset</button>
+        <button onclick="passo()">⏭ Passo</button>
+        <br>
+        <label>Velocità: <input type="range" id="velocita" min="50" max="500" value="200"></label>
+        <span id="velocitaTesto">200ms</span>
+    </div>
+    
+    <p>Generazione: <span id="generazione">0</span> | Celle vive: <span id="conteggio">0</span></p>
+    
+    <div id="griglia"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

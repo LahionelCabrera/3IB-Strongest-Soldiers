@@ -1,0 +1,54 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial;
+}
+
+h1 {
+    text-align: center;
+    color: #0f0;
+}
+
+p {
+    text-align: center;
+}
+
+.controlli {
+    text-align: center;
+    margin: 20px;
+}
+
+input {
+    width: 75px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 10px auto;
+}
+
+td {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #333;
+    background-color: #111;
+    cursor: pointer;
+}
+
+td.vivo {
+    background-color: #0f0;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
