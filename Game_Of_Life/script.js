@@ -1,15 +1,13 @@
-// variabili globali
 var righe = 20;
 var colonne = 30;
-var griglia = []; // qui salvo se le celle sono vive o morte
+var griglia = [];
 var timer = null; // per fermare il gioco
 var generazione = 0;
 var selezioneAttiva = false;
 var statoSelezione = 1; // 1 = attiva celle, 0 = disattiva celle
 
-// quando clicco su crea griglia
+
 function creaGriglia() {
-    // prendo i valori dagli input
     righe = document.getElementById("righe").value;
     colonne = document.getElementById("colonne").value;
     
