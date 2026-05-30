@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Game of Life</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <div class="controlli">
+        <label>Righe: <input type="number" id="righe" value="10" min="5" max="50"></label>
+        <label>Colonne: <input type="number" id="colonne" value="10" min="5" max="50"></label>
+        <button onclick="creaGriglia()">Crea Griglia</button>
+        <br>
+        <button onclick="start()">▶ Start</button>
+        <button onclick="stop()">⏹ Stop</button>
+        <button onclick="reset()">↺ Reset</button>
+        <button onclick="passo()">⏭ Passo</button>
+        <br>
+        <label>Velocità: <input type="range" id="velocita" min="50" max="500" value="200"></label>
+        <span id="velocitaTesto">200ms</span>
+        <p>Generazione: <span id="generazione">0</span> | Celle vive: <span id="conteggio">0</span></p>
+
+
+
+
+        <canvas id="game"></canvas>
+    </div>
+
+
+
+
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>3D Game of Life - Clickable</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+  }
+
+  #ui {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+  }
+
+  button {
+    padding: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div id="ui">
+  <button id="toggle">Pause</button>
+</div>
+
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js";
+
+/* ---------------- SETUP ---------------- */
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+camera.position.z = 35;
+
+/* ---------------- GRID ---------------- */
+const rows = 30;
+const cols = 30;
+
+let grid = [];
+let cubes = [];
+
+const aliveColor = 0x39ff14;
+const deadColor = 0x111111;
+
+/* ---------------- CREATE GRID ---------------- */
+for (let y = 0; y < rows; y++) {
+  grid[y] = [];
+  cubes[y] = [];
+
+  for (let x = 0; x < cols; x++) {
+
+    grid[y][x] = 0;
+
+    const geometry = new THREE.BoxGeometry(0.9, 0.9, 0.9);
+
+    const material = new THREE.MeshBasicMaterial({
+      color: deadColor
+    });
+
+    const cube = new THREE.Mesh(geometry, material);
+
+    cube.position.x = x - cols / 2;
+    cube.position.y = y - rows / 2;
+
+    cube.userData = { x, y };
+
+    scene.add(cube);
+    cubes[y][x] = cube;
+  }
+}
+
+/* ---------------- UPDATE COLORS ---------------- */
+function updateVisuals() {
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      cubes[y][x].material.color.set(
+        grid[y][x] ? aliveColor : deadColor
+      );
+    }
+  }
+}
+
+/* ---------------- NEIGHBORS ---------------- */
+function countNeighbors(x, y) {
+  let total = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+
+      if (dx === 0 && dy === 0) continue;
+
+      const nx = x + dx;
+      const ny = y + dy;
+
+      if (nx >= 0 && nx < cols && ny >= 0 && ny < rows) {
+        total += grid[ny][nx];
+      }
+    }
+  }
+
+  return total;
+}
+
+/* ---------------- GAME UPDATE ---------------- */
+function updateGrid() {
+  const next = [];
+
+  for (let y = 0; y < rows; y++) {
+    next[y] = [];
+
+    for (let x = 0; x < cols; x++) {
+
+      const neighbors = countNeighbors(x, y);
+      const alive = grid[y][x];
+
+      if (alive) {
+        next[y][x] = (neighbors === 2 || neighbors === 3) ? 1 : 0;
+      } else {
+        next[y][x] = (neighbors === 3) ? 1 : 0;
+      }
+    }
+  }
+
+  grid = next;
+  updateVisuals();
+}
+
+/* ---------------- CLICK TO TOGGLE CELLS ---------------- */
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+window.addEventListener("click", (event) => {
+
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects(scene.children);
+
+  if (intersects.length > 0) {
+    const obj = intersects[0].object;
+    const { x, y } = obj.userData;
+
+    grid[y][x] = grid[y][x] ? 0 : 1;
+
+    obj.material.color.set(
+      grid[y][x] ? aliveColor : deadColor
+    );
+  }
+});
+
+/* ---------------- PAUSE / PLAY ---------------- */
+let running = true;
+
+document.getElementById("toggle").onclick = () => {
+  running = !running;
+  document.getElementById("toggle").innerText =
+    running ? "Pause" : "Play";
+};
+
+/* ---------------- ANIMATION ---------------- */
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+
+animate();
+
+/* ---------------- LOOP ---------------- */
+setInterval(() => {
+  if (running) updateGrid();
+}, 200);
+
+/* ---------------- RESIZE ---------------- */
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
+</body>
+</html>
