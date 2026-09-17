@@ -1,0 +1,59 @@
+/*
+    ciò che è tra le quadre è opzionale parzialmente
+
+    selettore[ > " " , ] {
+        proprietà: valore [;]
+    } 
+
+    seltori possono essere:
+    marcatori
+    classi
+    id
+    pseudoclassi
+
+*/
+
+body{
+
+    /* IN JS si scrive backgroundColor perchè il - significa meno */
+    background-color: rgb(148, 200, 218);
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+h1{
+    color: blue;
+    border: 1px solid black;
+    text-align: center;
+}
+
+img#trulli{
+    /* padding-left: 10%;
+    padding-right: 10%; */
+    
+    /* immagine occupa il 100% della larghezza del contenitore (in questo caso il body, che ha un margine del 10% a  dx e sx)
+    (dunque l'immagine è l'80% della pagina) e l'altezza si adatta automaticamente  */
+    width: 100%; 
+    height: auto;
+}
+
+img{
+    /* padding-left: 10%;
+    padding-right: 10%; */
+    
+    /* immagine occupa il 100% della larghezza del contenitore (in questo caso il body, che ha un margine del 10% a  dx e sx)
+    (dunque l'immagine è l'80% della pagina) e l'altezza si adatta automaticamente  */
+    width: 10%; 
+    height: auto;
+}
+
+p{
+    background-color: rgb(255, 255, 255, 0.15);
+    text-align: justify;
+
+    /* quesi 2 spezzano le parole e vanno a capo, il secondo spezza solo se necessario */
+    /* word-break: break-all; */
+    word-wrap: break-word;
+    float: inline-start;
+}
