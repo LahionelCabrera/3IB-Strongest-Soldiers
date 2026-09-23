@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tris - Ultimate Edition</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>TRIS</h1>
+
+    <div class="layout-wrapper">
+      
+      <div class="side-block"></div>
+
+      <div class="center-block">
+        <div class="scacchiera">
+          <div class="cella" id="cella0" onclick="mossa(0)"></div>
+          <div class="cella" id="cella1" onclick="mossa(1)"></div>
+          <div class="cella" id="cella2" onclick="mossa(2)"></div>
+          <div class="cella" id="cella3" onclick="mossa(3)"></div>
+          <div class="cella" id="cella4" onclick="mossa(4)"></div>
+          <div class="cella" id="cella5" onclick="mossa(5)"></div>
+          <div class="cella" id="cella6" onclick="mossa(6)"></div>
+          <div class="cella" id="cella7" onclick="mossa(7)"></div>
+          <div class="cella" id="cella8" onclick="mossa(8)"></div>
+        </div>
+
+        <div id="info" class="info"></div>
+      </div>
+
+      <div class="side-block">
+        <div id="punteggio" class="score-board">
+          <h3>SCORE</h3>
+          <div class="player-score">
+            <span>Giocatore X</span>
+            <span id="punteggio_X">0</span>
+          </div>
+          <div class="player-score">
+            <span>Giocatore O</span>
+            <span id="punteggio_O">0</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="reset">
+      <button onclick="resetGame()">Reset Game</button>
+    </div>
+
+    <script src="scrypt.js"></script>
+  </body>
+</html>
