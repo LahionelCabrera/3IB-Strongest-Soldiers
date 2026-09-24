@@ -2,9 +2,9 @@ var statoattuale = 0;
 var bool = true;
 var tempo;
 
-btn_pa = document.getElementById("btn-pa");
-btn_l = document.getElementById("btn-l");
-btn_r = document.getElementById("btn-r");
+const btn_pa = document.getElementById("btn-pa");
+const btn_l = document.getElementById("btn-l");
+const btn_r = document.getElementById("btn-r");
 
 // array di immagini
 const img_arr = [
@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("trulli").src="./img/" + immagine.nome + ".png";
     document.body.style.backgroundColor=immagine.coloreBG;
     
-    // Pianifica il primo cambio rispettando il tempo dell'immagine iniziale
     tempo=setTimeout(cambio, immagine.tempo);
 });
 
@@ -86,6 +85,9 @@ btn_l.addEventListener('click', () => {
     const immagine=img_arr[statoattuale];
     document.getElementById("trulli").src="./img/"+immagine.nome+".png";
     document.body.style.backgroundColor=immagine.coloreBG; 
+    if (statoattuale == img_arr.length-1){
+        document.querySelector("h1").style.color = "white"
+        document.querySelector("p").style.color = "white";}
     
 });
 
