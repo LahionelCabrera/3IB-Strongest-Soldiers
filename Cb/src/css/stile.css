@@ -1,0 +1,28 @@
+/*
+    selettore [ > " " , ] {
+        proprietà : valore [;]
+    }
+
+    marcatori
+    classi
+    id
+    pseudoclassi
+
+*/
+body{
+    background-color: rgba(200, 132, 255, 0.717);
+    margin-left: 10%; 
+    margin-right: 10% ;
+}
+img#cervino{
+    width: 100%;
+}
+h1{
+    text-align: center;
+}
+p{
+    text-align: justify;
+    /*word-break: break-all;*/
+    word-wrap: break-word;
+    background-color: rgba(250, 235, 215, 0.242);
+}

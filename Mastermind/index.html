@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastermind</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Mastermind</h1>
+    
+    <div class="controlli">
+        <label for="difficolta">Difficoltà:</label>
+        <select id="difficolta" onchange="nuovaPartita()">
+            <option value="facile">Facile (12 tentativi, 4 colori)</option>
+            <option value="normale" selected>Normale (10 tentativi, 5 colori)</option>
+            <option value="difficile">Difficile (8 tentativi, 6 colori)</option>
+        </select>
+        <button onclick="nuovaPartita()">Nuova Partita</button>
+    </div>
+
+    <p id="infoColori"></p>
+
+    <div class="controlli" id="selettoriColori">
+        <div class="riga-selettori">
+            <label>1°:</label> <select id="p1"></select>
+            <label>2°:</label> <select id="p2"></select>
+            <label>3°:</label> <select id="p3"></select>
+            <label>4°:</label> <select id="p4"></select>
+        </div>
+        <button id="btnInvia" onclick="tentativo()">Invia Tentativo</button>
+    </div>
+
+    <div id="messaggio"></div>
+
+    <h3>Storico Tentativi</h3>
+    <div id="storico"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
