@@ -2,6 +2,15 @@ var statoattuale = 0;
 var bool = true;
 var tempo;
 
+let max_fiocchi = 100;
+let min_fiocchi = 20;
+
+let max_fiocchi_dim = 20;
+let min_fiocchi_dim = 2;
+
+larg=window.innerWidth; //larghezza finestra
+alt=window.innerHeight; //altezza finestra
+
 const btn_pa = document.getElementById("btn-pa");
 const btn_l = document.getElementById("btn-l");
 const btn_r = document.getElementById("btn-r");
@@ -121,4 +130,32 @@ function cambio() {
 
     if (bool) 
        tempo=setTimeout(cambio, immagine.tempo);
+   
+    create_fiocchi();
 }
+
+//PARTE FIOCCHI DI NEVE 
+
+function random_num(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function create_fiocchi() {
+
+    let num_fiocchi=random_num(min_fiocchi, max_fiocchi); //numero casuale di fiocchi
+
+    for (let i=0; i<num_fiocchi; i++) {
+        let fiocco=document.createElement("img"); //crea elemento (madonna come cazzo scrive il codice cornali)
+
+        fiocco.src="./fiocchi/fiocco" + String(random_num(1, 5)) + ".png"; //immagine fiocco
+
+        fiocco.style.left=random_num(0, larg)+"px"; //posizione orizzontale casuale
+        fiocco.style.top=random_num(0, alt)+"px"; //posizione verticale casuale
+
+        fiocco.style.width=random_num(min_fiocchi_dim, max_fiocchi_dim)+"px"; //dimensione casuale
+        fiocco.style.height=fiocco.style.width; //dimensione uguale/quadrata
+        document.body.appendChild(fiocco);
+        
+    }
+}
+

@@ -3,28 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gioco della vita</title>
+    <title>il gioco della vita</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <h1>Gioco della vita</h1>
+    <h1>Il Gioco della Vita</h1>
+    <p>Regole di default: isolamento: <2, sopravvivenza:2 o 3, sovrappopolazione: >3, riproduzione: 3</p>
 
-    <!--div decisionale-->
-    <div>
-        <select name="righe" id="righe">
+    <div class="controls">
+        <label for="righe">Righe:</label>
+        <select name="righe" id="righe"></select>
+        
+        <label for="colonne">Colonne:</label>
+        <select name="colonne" id="colonne"></select>
 
+        <label for="nascono">Nascono:</label>
+        <select id="nascono"></select>
+
+
+        <label for="sopravvivono">Sopravvivono:</label>
+        <select id="sopravvivono">
+          <option value="2" selected>2</option>
         </select>
-        <select name="colonne" id="colonne">
-
-        </select>
-        <button onclick="creaGriglia()">Crea griglia</button>
+      
+        
+        <button onclick="tabella()">Crea Nuova griglia</button>
+        <button id="gioco" onclick="gioco()">Avvia gioco</button>
+        <button id="next" onclick="prox()">Passo successivo</button>
+        <button id="svuota" onclick="svuota()">Svuota griglia</button>
     </div>
       
-    <div id="reset">
-      <button onclick="resetGame()">Reset Game</button>
+    <div class="canvas-container">
+        <canvas id="canvas" width="800" height="800"></canvas>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scrypt.js"></script>
   </body>
 </html>

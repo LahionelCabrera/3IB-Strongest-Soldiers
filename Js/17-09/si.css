@@ -34,6 +34,7 @@ img#trulli {
     width: 665px;
     height: 444px;
     object-fit: cover; /* Mantiene le proporzioni ed evita che l'immagine si deformi */
+    position: static;
 } 
 
 
@@ -64,4 +65,8 @@ p{
 .controlli button {
     font-size: 35px;    /* Ingrandisce le icone */
     margin: 0 5px;      /* Spazio tra un pulsante e l'altro */
+}
+
+img{
+    position: absolute;
 }
