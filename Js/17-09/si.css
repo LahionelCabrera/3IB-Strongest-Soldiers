@@ -23,37 +23,45 @@ body{
 }
 
 h1{
-    color: blue;
+    color: rgb(0, 0, 0);
     border: 1px solid black;
     text-align: center;
 }
 
-img#trulli{
-    /* padding-left: 10%;
-    padding-right: 10%; */
-    
-    /* immagine occupa il 100% della larghezza del contenitore (in questo caso il body, che ha un margine del 10% a  dx e sx)
-    (dunque l'immagine è l'80% della pagina) e l'altezza si adatta automaticamente  */
-    width: 100%; 
-    height: auto;
-}
+img#trulli {
+    display: block;
+    margin: 0 auto; /* Centra l'immagine orizzontalmente */
+    width: 665px;
+    height: 444px;
+    object-fit: cover; /* Mantiene le proporzioni ed evita che l'immagine si deformi */
+} 
 
-img{
-    /* padding-left: 10%;
+
+/* img{
+   /*  padding-left: 10%;
     padding-right: 10%; */
     
     /* immagine occupa il 100% della larghezza del contenitore (in questo caso il body, che ha un margine del 10% a  dx e sx)
-    (dunque l'immagine è l'80% della pagina) e l'altezza si adatta automaticamente  */
+    (dunque l'immagine è l'80% della pagina) e l'altezza si adatta automaticamente  *-/
     width: 10%; 
     height: auto;
-}
+} */
 
 p{
-    background-color: rgb(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.007);
     text-align: justify;
 
     /* quesi 2 spezzano le parole e vanno a capo, il secondo spezza solo se necessario */
     /* word-break: break-all; */
     word-wrap: break-word;
     float: inline-start;
+}
+
+.controlli {
+    text-align: center; /* Centra i pulsanti */
+}
+
+.controlli button {
+    font-size: 35px;    /* Ingrandisce le icone */
+    margin: 0 5px;      /* Spazio tra un pulsante e l'altro */
 }
