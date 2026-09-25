@@ -67,6 +67,16 @@ p{
     margin: 0 5px;      /* Spazio tra un pulsante e l'altro */
 }
 
-img{
-    position: absolute;
+@keyframes fiocchi{
+    from{}
+    to{top: 140%;}
 }
+
+img#fiocco{
+    position: absolute;
+    animation-name: fiocchi;
+    animation-duration: 10000ms;
+    animation-iteration-count: infinite;
+}
+
+

@@ -2,8 +2,8 @@ var statoattuale = 0;
 var bool = true;
 var tempo;
 
-let max_fiocchi = 100;
-let min_fiocchi = 20;
+let max_fiocchi = parseInt(document.getElementById("fiocchi").value);
+let min_fiocchi = parseInt(document.getElementById("fiocchi").min);
 
 let max_fiocchi_dim = 20;
 let min_fiocchi_dim = 2;
@@ -14,7 +14,7 @@ alt=window.innerHeight; //altezza finestra
 const btn_pa = document.getElementById("btn-pa");
 const btn_l = document.getElementById("btn-l");
 const btn_r = document.getElementById("btn-r");
-
+const btn_f = document.getElementById("btn-f");
 // array di immagini
 const img_arr = [
     {
@@ -44,6 +44,8 @@ const img_arr = [
         tempo: 3000, //milliseconds
     }
 ];
+
+let arr_fiocchi;
 
 document.addEventListener('DOMContentLoaded', () => {
     const immagine=img_arr[statoattuale];
@@ -131,10 +133,9 @@ function cambio() {
     if (bool) 
        tempo=setTimeout(cambio, immagine.tempo);
    
-    create_fiocchi();
 }
 
-//PARTE FIOCCHI DI NEVE 
+//------ PARTE FIOCCHI DI NEVE ------
 
 function random_num(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -143,7 +144,8 @@ function random_num(min, max) {
 function create_fiocchi() {
 
     let num_fiocchi=random_num(min_fiocchi, max_fiocchi); //numero casuale di fiocchi
-
+    console.log(num_fiocchi);
+    console.log(parseInt(document.getElementById("fiocchi").value));
     for (let i=0; i<num_fiocchi; i++) {
         let fiocco=document.createElement("img"); //crea elemento (madonna come cazzo scrive il codice cornali)
 
@@ -152,10 +154,14 @@ function create_fiocchi() {
         fiocco.style.left=random_num(0, larg)+"px"; //posizione orizzontale casuale
         fiocco.style.top=random_num(0, alt)+"px"; //posizione verticale casuale
 
+        fiocco.id="fiocco"; //id fiocco
+
         fiocco.style.width=random_num(min_fiocchi_dim, max_fiocchi_dim)+"px"; //dimensione casuale
         fiocco.style.height=fiocco.style.width; //dimensione uguale/quadrata
         document.body.appendChild(fiocco);
-        
+
     }
+    arr_fiocchi=document.querySelectorAll(".fiocco"); //seleziona tutti i fiocchi creati
 }
+btn_f.addEventListener('click', create_fiocchi);
 
