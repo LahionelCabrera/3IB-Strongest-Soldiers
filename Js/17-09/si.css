@@ -67,16 +67,28 @@ p{
     margin: 0 5px;      /* Spazio tra un pulsante e l'altro */
 }
 
-@keyframes fiocchi{
+@keyframes finocchi{
     from{}
-    to{top: 140%;}
+    to{
+        top: 110%;
+        transform: translateX(var(--vento));
+    }
 }
 
-img#fiocco{
+img.fiocco{
     position: absolute;
-    animation-name: fiocchi;
-    animation-duration: 10000ms;
-    animation-iteration-count: infinite;
+    animation-name: finocchi;
+    top:-10%;
+    /* animation-duration: 10000ms; /* animazione di tot millisecondi */
+    animation-iteration-count: infinite; /* animazione infinita */
+
+    animation-duration: var(--durata);  /* velocità dinamica */
+    animation-delay: var(--ritardo);    /* inizio sfasato*/
+
+    animation-timing-function: linear;  /* velocità costante */
+    pointer-events: none;               /* Impedisce ai fiocchi di bloccare i click sulla pagina */
+
+
 }
 
 
