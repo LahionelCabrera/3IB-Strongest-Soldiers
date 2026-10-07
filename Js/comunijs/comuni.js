@@ -1,3 +1,8 @@
+const prov_ref= document.getElementById("provincia");
+const reg_ref= document.getElementById("regione");
+const com_ref= document.getElementById("comune");
+
+
 class Regione 
 {
     constructor(nome, codice) {
@@ -63281,17 +63286,50 @@ function riempicomuni() {
         if (!regioni.find(r => r.cod_reg === tutti_comuni[i].cod_reg)?.cod_reg)  //se non trova un valore restituisce undefined, usiamo il ? per evitare che provi a eseguire il codice susseguente in caso che trovi undefined
                                                               //grazie alla negazione se restituisce undefined diventa true ed entra nelle istruzioni altrimenti cerca il cod_reg e lo fa diventare false per non entrare                                                                        
             regioni.push(new Regione(tutti_comuni[i].den_reg, tutti_comuni[i].cod_reg));
-        if (!province.find(p => p.den_prov === tutti_comuni[i].den_prov)?.den_prov)
+        if (!province.find(p => p.nome === tutti_comuni[i].den_prov)?.nome)
             province.push(new Provincia(tutti_comuni[i].den_prov, regioni.find(r => r.cod_reg === tutti_comuni[i].cod_reg), tutti_comuni[i].sigla));
-        comuni.push(new Comune(tutti_comuni[i].comune,tutti_comuni[i].pro_com, province.find(p => p.den_prov === tutti_comuni[i].den_prov)));
+        comuni.push(new Comune(tutti_comuni[i].comune,tutti_comuni[i].pro_com_t, province.find(p => p.nome === tutti_comuni[i].den_prov)));
     }
  
 }
 
 riempicomuni();
-console.log(comuni.length)
-console.log(province.length)
-console.log(regioni.length)
+
+function riempiSelectRegione() {
+    for (let i = 0; i < regioni.length; i++) {
+      const opzione = new Option(regioni[i].nome, regioni[i].nome);
+      reg_ref.add(opzione);
+
+    }
+}
+riempiSelectRegione();
+
+function riempiSelectProvincia() {
+    prov_ref.length = 1;
+
+    for (let i = 0; i < province.length; i++) {
+      if(province[i].regione.nome != reg_ref.value)
+        continue; 
+      const opzione = new Option(province[i].nome, province[i].nome);
+      prov_ref.add(opzione);
+    
+    }
+}
+reg_ref.addEventListener("change", riempiSelectProvincia);
+
+function riempiSelectComune() {
+    com_ref.length = 1;
+
+    for (let i = 0; i < comuni.length; i++) {
+      if(comuni[i].provincia.nome != prov_ref.value)
+        continue; 
+      const opzione = new Option(comuni[i].nome, comuni[i].nome);
+      com_ref.add(opzione);
+    
+    }
+}
+prov_ref.addEventListener("change", riempiSelectComune);
+
 
 // const piemonte = new Regione("Piemonte",1)
 // const torino = new Provincia("Torino",piemonte,"TO")
