@@ -1,21 +1,364 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Indovina <i class="fa fa-child" aria-hidden="true"></i></title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
+<head>
+  <title>Indovina <i class="fa fa-child" aria-hidden="true"></i></title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <!doctype html>
+<html lang="en">
+
+<head>
+  <title>Indovina Chi? - 8 per Riga</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://bootstrapcdn.com"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  <!-- Font Awesome per le icone -->
+  <link rel="stylesheet" href="https://cloudflare.com">
+
+  <style>
+    /* Configurazione personalizzata per avere esattamente 8 colonne su schermi grandi (min-width: 992px) */
+    @media (min-width: 992px) {
+      .col-lg-1-5 {
+        flex: 0 0 12.5%;
+        max-width: 12.5%;
+      }
+    }
+
+    /* Stile per l'interazione con le card */
+    .card-personaggio {
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .card-personaggio:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .placeholder-avatar {
+      background-color: #e9ecef;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+
+  <div class="container-fluid py-4">
+    <h1 class="text-center mb-4">Indovina <i class="fa fa-child text-primary" aria-hidden="true"></i></h1>
+    
+    <!-- Griglia dei 24 Personaggi (8 per riga su PC) -->
+    <div class="row no-gutters px-2">
       
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="indovina.js"></script>
-  </body>
+      <!-- Card 0: Alex -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="0">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Alex</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 1: Beatrice -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="1">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Beatrice</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Carlo -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="2">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Carlo</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Daniele -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="3">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Daniele</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Elena -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="4">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Elena</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Federico -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="5">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Federico</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: Giorgia -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="6">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Giorgia</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7: Hassan -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="7">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Hassan</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8: Irene -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="8">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Irene</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9: Leo -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="9">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Leo</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 10: Marta -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="10">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Marta</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 11: Nicola -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="11">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Nicola</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 12: Olga -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="12">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Olga</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 13: Pietro -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="13">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Pietro</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 14: Quinto -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="14">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Quinto</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 15: Rosa -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="15">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Rosa</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 16: Stefano -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="16">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Stefano</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 17: Teresa -->
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="17">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Teresa</h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="17">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Teresa</h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="17">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Teresa</h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="17">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Teresa</h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="17">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Teresa</h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="17">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Teresa</h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-sm-3 col-lg-1-5 p-1">
+        <div class="card h-100 card-personaggio" data-id="17">
+          <div class="placeholder-avatar card-img-top">
+            <i class="fa fa-user fa-2x"></i>
+          </div>
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0" style="font-size: 0.9rem;">Teresa</h6>
+          </div>
+        </div>
+      </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="indovina.js"></script>
+</body>
+
 </html>
