@@ -1,4 +1,9 @@
 const myHeaders = new Headers();
+let USERname
+const gbton = document.getElementById("gioca");
+
+addEventListener()
+
 myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
 const requestOptions = {
