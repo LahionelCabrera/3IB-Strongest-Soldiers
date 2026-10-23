@@ -1,3 +1,5 @@
+const { useSyncExternalStore } = require("react");
+
 const personaggi = [
   {
     id: 0,
@@ -320,47 +322,125 @@ class API {
         this.urlbase = "https://classe5id.altervista.org/games/";
     }
 
+    //restituisce l'id della partita
     async creaGioco(username) {
-        const urli = this.urlbase + "partita/" + username;
-        
-        id = await fetch(urli).text();
-        return id;
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", "••••••");
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          redirect: "follow"
+        };
+
+        fetch("https://classe5ID.altervista.org/games/partita/"+ utente, requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.error(error));
     }
 
+    //restituisce l'id della partita a cui ti sei unito
     async gioca(ID,username) {
-        const urli = this.urlbase + "join/" + ID + "/" + username;
-        await fetch(urli);
-        return ID;
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", "••••••");
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          redirect: "follow"
+        };
+
+        fetch("https://classe5ID.altervista.org/games/join/", requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.error(error));
     }
 
+    //restituisce la move's id
     async mossa(ID,username,mossa) {
-      const urli = this.urlbase + "mossa/" + ID + "/" + username + "/" + mossa;    
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", "••••••");
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        redirect: "follow"
+      };
+
+      fetch("https://classe5ID.altervista.org/games/mossa/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));    
       
     }
     
 
+    //restituisce la lista di partite disponibili
     async avaiabled_games() {
-      const urli = this.urlbase + "partita";
-      game_list = await fetch(urli);
-      return game_list
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", "••••••");
+
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+      };
+
+      fetch("https://classe5ID.altervista.org/games/partita", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
     }
 
+    //restituisce una lista di partite che ha un quantitativo n di giocatori
     async avaiabled_games_n(n) {
-      const urli = this.urlbase + "partitaN" + n;   
-      await fetch(urli) 
-      return game_list;
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", "••••••");
+
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+      };
+
+      fetch("https://classe5ID.altervista.org/games/partitaN/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
     }
 
+    //restituisce l'ultima mossa
     async last_move(ID){
-      const urli = this.urlbase + "mossa/" + ID;
-      last_move=await fetch(urli);
-      return last_move;
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", "••••••");
+
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+      };
+
+      fetch("https://classe5ID.altervista.org/games/mossa/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
     }
 
-    async game_move(ID) {
-      const urli = this.urlbase + "mosse/" + ID;
-      move_list = await fetch(urli);
-      return move_list;
+    //restituisce la lista delle mosse
+    async game_moves(ID) {
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", "••••••");
+
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+      };
+
+      fetch("https://classe5ID.altervista.org/games/mosse/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
     }
 
    
@@ -401,5 +481,14 @@ for (let i = 0; i < personaggi.length; i++) {
     ));
 }
 
-const id = Math.floor(Math.random() * (arr_personaggi.length+ 1));
+const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length+ 1));
 const API=new API;
+
+//ancora da implementare
+const domande=document.getElementById("domande");
+
+//in base alla domanda che premi invia una mossa diversa
+domande.addEventListener('click', ()=>{
+
+
+})

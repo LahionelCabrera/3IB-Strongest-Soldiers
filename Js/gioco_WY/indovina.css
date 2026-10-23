@@ -1,0 +1,125 @@
+/* ==========================================
+   CONFIGURAZIONE GENERALE & LAYOUT
+   ========================================== */
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+}
+
+/* Griglia personalizzata 8 colonne su schermi grandi */
+@media (min-width: 992px) {
+  .col-lg-1-5 {
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
+  }
+}
+
+/* Titolo e Intestazione */
+h1 {
+  font-weight: 800;
+  color: #1a2a3a;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
+}
+
+h1 i {
+  filter: drop-shadow(0 2px 4px rgba(0, 123, 255, 0.3));
+}
+
+/* ==========================================
+   STILE DELLE SCHEDE PERSONAGGIO (CARD)
+   ========================================== */
+
+/* Contenitore con prospettiva 3D per l'effetto ribaltamento */
+.card-personaggio {
+  border: none !important;
+  border-radius: 12px !important;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+}
+
+/* Effetto Hover */
+.card-personaggio:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Avatar / Immagine di Copertina */
+.placeholder-avatar {
+  background: linear-gradient(180deg, #e0eafc 0%, #cfdef3 100%);
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a6572;
+  transition: background 0.3s ease, color 0.3s ease;
+  border-bottom: 2px solid #f0f2f5;
+}
+
+.placeholder-avatar i {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  transition: transform 0.3s ease;
+}
+
+.card-personaggio:hover .placeholder-avatar i {
+  transform: scale(1.15);
+}
+
+/* Corpo della Card (Nome) */
+.card-body {
+  background-color: #ffffff;
+  padding: 8px 4px !important;
+}
+
+.card-title {
+  color: #34495e;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+}
+
+/* ==========================================
+   STATI INTERATTIVI (ELIMINATO / SELEZIONATO)
+   ========================================== */
+
+/* 1. Personaggio Eliminato (Opzione 'Flipped' stile tabellone originale) */
+.card-personaggio.eliminated,
+.card-personaggio.flipped {
+  opacity: 0.35;
+  filter: grayscale(100%);
+  transform: scale(0.92);
+  box-shadow: none;
+  pointer-events: none; /* Rimuove hover e click se eliminato */
+}
+
+/* Segno "X" rosso sovrapposto quando viene eliminato */
+.card-personaggio.eliminated::after,
+.card-personaggio.flipped::after {
+  content: '✕';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  font-weight: bold;
+  color: #e74c3c;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* 2. Personaggio Selezionato (es. il tuo personaggio scelto) */
+.card-personaggio.selected {
+  border: 3px solid #007bff !important;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+  transform: translateY(-4px);
+}
+
+.card-personaggio.selected .placeholder-avatar {
+  background: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
+  color: #ffffff;
+}
