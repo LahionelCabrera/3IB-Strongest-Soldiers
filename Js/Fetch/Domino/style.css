@@ -1,0 +1,109 @@
+html,
+body {
+  margin: 0px;
+  scrollbar-width: none;
+}
+body {
+  min-height: 100vh;
+  background: green;
+}
+
+.Domino {
+  width: 50px;
+  height: 100px;
+  background-color: white;
+  border-radius: 5%;
+  margin: 2px;
+}
+
+.Quadretti {
+  width: 50px;
+  height: 50px;
+  border-radius: 5%;
+}
+
+.linea {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid black;
+}
+
+.Pallina {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.D1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.D2 {
+  display: grid;
+  grid-template-rows: auto auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.D3 {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.D4 {
+  display: grid;
+  grid-template-columns: 25px 25px;
+  align-items: center;
+  justify-items: center;
+}
+
+.D5 {
+  display: grid;
+  grid-template-columns: 25px 25px;
+  align-items: center;
+  justify-items: center;
+}
+.PD5 {
+  grid-column: span 2;
+}
+.D6 {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-items: center;
+}
+#TavoloGioco {
+  height: 100%;
+  width: 100%;
+}
+
+#MazzoGiocatore2 {
+  display: grid;
+  grid-auto-flow: column;
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#MazzoGiocatore1 {
+  display: grid;
+  grid-auto-flow: column;
+  position: fixed;
+  bottom: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#menu{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+}

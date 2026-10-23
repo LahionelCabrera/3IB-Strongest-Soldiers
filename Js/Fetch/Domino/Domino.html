@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Domino</title>
+  </head>
+  <body>
+    <!-- Template della tessera completa -->
+    <template id="domino">
+      <div class="Domino">
+        <div class="sopra"></div>
+        <hr class="linea" />
+        <div class="sotto"></div>
+      </div>
+    </template>
+
+    <template id="d0">
+      <div class="Quadretti">
+      </div>
+    </template>
+
+    <!-- Template valore 1 -->
+    <template id="d1">
+      <div class="Quadretti D1">
+        <div class="Pallina"></div>
+      </div>
+    </template>
+
+    <!-- Template valore 2 -->
+    <template id="d2">
+      <div class="Quadretti D2">
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+      </div>
+    </template>
+
+    <!-- Template valore 3 -->
+    <template id="d3">
+      <div class="Quadretti D3">
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+      </div>
+    </template>
+
+    <!-- Template valore 4 -->
+    <template id="d4">
+      <div class="Quadretti D4">
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+      </div>
+    </template>
+
+    <!-- Template valore 5 -->
+    <template id="d5">
+      <div class="Quadretti D5">
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina PD5"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+      </div>
+    </template>
+
+    <!-- Template valore 6 -->
+    <template id="d6">
+      <div class="Quadretti D6">
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+        <div class="Pallina"></div>
+      </div>
+    </template>
+
+
+    <div id="TavoloGioco">
+      <div id="MazzoGiocatore2">
+        
+ <div class="Domino">
+        <div class="sopra"></div>
+        <hr class="linea" />
+        <div class="sotto"></div>
+      </div>
+        </div>
+      </div>
+
+      <div id="MazzoGiocatore1">
+        <div class="Domino">
+        <div class="sopra"><div class="Quadretti">
+      </div></div>
+        <hr class="linea" />
+        <div class="sotto"><div class="Quadretti">
+      </div></div>
+      </div>
+        <div class="Domino">
+          <div class="sopra">
+            <div class="Quadretti D1">
+              <div class="Pallina"></div>
+            </div>
+          </div>
+          <hr class="linea" />
+          <div class="sotto">
+            <div class="Quadretti D2">
+              <div class="Pallina"></div>
+              <div class="Pallina"></div>
+            </div>
+          </div>
+        </div>
+        <div class="Domino">
+          <div class="sopra">
+            <div class="Quadretti D1">
+              <div class="Pallina"></div>
+            </div>
+          </div>
+          <hr class="linea" />
+          <div class="sotto">
+            <div class="Quadretti D2">
+              <div class="Pallina"></div>
+              <div class="Pallina"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="menu">
+
+    </div>
+
+    
+    <script src="./script.js"></script>
+  </body>
+</html>

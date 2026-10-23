@@ -1,4 +1,4 @@
-const urlTasso = "./tasso-gerusalemme-liberata.txt"
+/*const urlTasso = "./tasso-gerusalemme-liberata.txt"
 const urlFind = "https://classe5id.altervista.org/parole/search.php?word="
 const urlRandom = "https://classe5id.altervista.org/parole/search.php?random" vc  
 let parole;
