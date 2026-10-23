@@ -323,9 +323,9 @@ class API {
     }
 
     //restituisce l'id della partita
-    async creaGioco(username) {
+    async creaGioco(utente) {
         const myHeaders = new Headers();
-        myHeaders.append("Authorization", "••••••");
+        myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
         const requestOptions = {
           method: "POST",
@@ -333,16 +333,16 @@ class API {
           redirect: "follow"
         };
 
-        fetch("https://classe5ID.altervista.org/games/partita/"+ utente, requestOptions)
+        fetch("https://classe5ID.altervista.org/games/partita/", requestOptions)
           .then((response) => response.text())
           .then((result) => console.log(result))
           .catch((error) => console.error(error));
     }
 
     //restituisce l'id della partita a cui ti sei unito
-    async gioca(ID,username) {
+    async gioca(ID,utente) {
         const myHeaders = new Headers();
-        myHeaders.append("Authorization", "••••••");
+        myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
         const requestOptions = {
           method: "POST",
@@ -357,9 +357,9 @@ class API {
     }
 
     //restituisce la move's id
-    async mossa(ID,username,mossa) {
+    async mossa(ID,utente,mossa) {
       const myHeaders = new Headers();
-      myHeaders.append("Authorization", "••••••");
+      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
       const requestOptions = {
         method: "POST",
@@ -378,7 +378,7 @@ class API {
     //restituisce la lista di partite disponibili
     async avaiabled_games() {
       const myHeaders = new Headers();
-      myHeaders.append("Authorization", "••••••");
+      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
       const requestOptions = {
         method: "GET",
@@ -395,7 +395,7 @@ class API {
     //restituisce una lista di partite che ha un quantitativo n di giocatori
     async avaiabled_games_n(n) {
       const myHeaders = new Headers();
-      myHeaders.append("Authorization", "••••••");
+      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
       const requestOptions = {
         method: "GET",
@@ -412,7 +412,7 @@ class API {
     //restituisce l'ultima mossa
     async last_move(ID){
       const myHeaders = new Headers();
-      myHeaders.append("Authorization", "••••••");
+      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
       const requestOptions = {
         method: "GET",
@@ -429,7 +429,7 @@ class API {
     //restituisce la lista delle mosse
     async game_moves(ID) {
       const myHeaders = new Headers();
-      myHeaders.append("Authorization", "••••••");
+      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
       const requestOptions = {
         method: "GET",
@@ -484,6 +484,9 @@ for (let i = 0; i < personaggi.length; i++) {
 const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length+ 1));
 const API=new API;
 
+let utente="marco"; //document.getElementById("utente").innerText;
+
+/*
 //ancora da implementare
 const domande=document.getElementById("domande");
 
@@ -491,4 +494,4 @@ const domande=document.getElementById("domande");
 domande.addEventListener('click', ()=>{
 
 
-})
+})*/
