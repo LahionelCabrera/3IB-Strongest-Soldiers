@@ -1,5 +1,3 @@
-const { useSyncExternalStore } = require("react");
-
 const personaggi = [
   {
     id: 0,
@@ -448,6 +446,7 @@ class API {
 
 class Personaggi {
     constructor(id, nome, capelli, barba, occhi, occhiali, cappello, baffi, orecchini, collana, naso) {
+        this.id = id;
         this.nome = nome;
         this.caratteristiche = {
             capelli: capelli,
@@ -481,8 +480,8 @@ for (let i = 0; i < personaggi.length; i++) {
     ));
 }
 
-const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length+ 1));
-const API=new API;
+const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length));
+const api=new API;
 
 let utente="marco"; //document.getElementById("utente").innerText;
 
