@@ -313,6 +313,7 @@ const personaggi = [
   }
 ];
 
+
 class API {
     constructor() {
         this.username = "4IB";
@@ -331,10 +332,19 @@ class API {
           redirect: "follow"
         };
 
-        fetch("https://classe5ID.altervista.org/games/partita/", requestOptions)
-          .then((response) => response.text())
-          .then((result) => console.log(result))
-          .catch((error) => console.error(error));
+        fetch("https://classe5ID.altervista.org/games/partita/"+utente, requestOptions)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Errore HTTP " + response.status);
+          }
+          return response.json();
+        })
+        // .then((data) => {
+        //   console.log(data);
+        // })
+        // .catch((error) => {
+        //   console.error("Errore:", error);
+        // });
     }
 
     //restituisce l'id della partita a cui ti sei unito
@@ -348,10 +358,19 @@ class API {
           redirect: "follow"
         };
 
-        fetch("https://classe5ID.altervista.org/games/join/", requestOptions)
-          .then((response) => response.text())
-          .then((result) => console.log(result))
-          .catch((error) => console.error(error));
+        fetch("https://classe5ID.altervista.org/games/join/" + ID + "" + utente, requestOptions)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Errore HTTP " + response.status);
+          }
+          return response.json();
+        })
+        // .then((data) => {
+        //   console.log(data);
+        // })
+        // .catch((error) => {
+        //   console.error("Errore:", error);
+        // });
     }
 
     //restituisce la move's id
@@ -365,10 +384,19 @@ class API {
         redirect: "follow"
       };
 
-      fetch("https://classe5ID.altervista.org/games/mossa/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));    
+      fetch("https://classe5ID.altervista.org/games/mossa/" + ID + "/" + utente + "/" + mossa, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+        return response.json();
+      })
+      // .then((data) => {
+      //   console.log(data);
+      // })
+      // .catch((error) => {
+      //   console.error("Errore:", error);
+      // });    
       
     }
     
@@ -385,9 +413,19 @@ class API {
       };
 
       fetch("https://classe5ID.altervista.org/games/partita", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+
+        return response.json();
+      })
+      // .then((data) => {
+      //   console.log("Risposta JSON del server:", data);
+      // })
+      // .catch((error) => {
+      //   console.error("Errore:", error);
+      // });
     }
 
     //restituisce una lista di partite che ha un quantitativo n di giocatori
@@ -401,10 +439,14 @@ class API {
         redirect: "follow"
       };
 
-      fetch("https://classe5ID.altervista.org/games/partitaN/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+      fetch("https://classe5ID.altervista.org/games/partitaN/"+n, requestOptions)
+        .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+
+        return response.json();
+      })
     }
 
     //restituisce l'ultima mossa
@@ -418,10 +460,14 @@ class API {
         redirect: "follow"
       };
 
-      fetch("https://classe5ID.altervista.org/games/mossa/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+      fetch("https://classe5ID.altervista.org/games/mossa/"+ID, requestOptions)
+        .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+
+        return response.json().data.play;
+      });
     }
 
     //restituisce la lista delle mosse
@@ -435,10 +481,14 @@ class API {
         redirect: "follow"
       };
 
-      fetch("https://classe5ID.altervista.org/games/mosse/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+      fetch("https://classe5ID.altervista.org/games/mosse/"+ID, requestOptions)
+        .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+
+        return response.json().data.moves;
+      });
     }
 
    
@@ -494,3 +544,22 @@ domande.addEventListener('click', ()=>{
 
 
 })*/
+
+let pref_ut="indovina_";
+let partite=api.avaiabled_games().dati;
+//console.log(partite);
+
+let btn_gioca=document.getElementById("btn_gioca")
+let id_partita;
+console.log(api.creaGioco())
+
+// btn_gioca.addEventListener('click', ()=>{
+//   for(let i=0; i<partite.length; i++){
+//     if(partite[i].PLAYER1.includes(pref_ut) && partite[i].PLAYER2==NULL)
+//       id_partita=partite[i].ID;  
+//       return;
+//   }
+//   api.creaGioco()
+
+
+// })

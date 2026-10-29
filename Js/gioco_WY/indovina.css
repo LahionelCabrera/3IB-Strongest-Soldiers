@@ -45,6 +45,12 @@ h1 i {
   user-select: none;
 }
 
+.card-personaggio .card-img-top {
+  width: 100%;
+  height: 140px;        
+  object-fit: contain;  /* non deforma l'immagine */
+}
+
 /* Effetto Hover */
 .card-personaggio:hover {
   transform: translateY(-5px) scale(1.03);
@@ -64,7 +70,7 @@ h1 i {
 }
 
 .placeholder-avatar i {
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   transition: transform 0.3s ease;
 }
 
@@ -95,7 +101,8 @@ h1 i {
   filter: grayscale(100%);
   transform: scale(0.92);
   box-shadow: none;
-  pointer-events: none; /* Rimuove hover e click se eliminato */
+  pointer-events: none;
+  /* Rimuove hover e click se eliminato */
 }
 
 /* Segno "X" rosso sovrapposto quando viene eliminato */
@@ -109,7 +116,7 @@ h1 i {
   font-size: 3rem;
   font-weight: bold;
   color: #e74c3c;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* 2. Personaggio Selezionato (es. il tuo personaggio scelto) */
@@ -122,4 +129,48 @@ h1 i {
 .card-personaggio.selected .placeholder-avatar {
   background: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
   color: #ffffff;
+}
+
+.card-personaggio.eliminato {
+  opacity: 0.25;
+  filter: grayscale(100%);
+}
+
+.pannello {
+  width: 100%;
+  min-height: 26rem;
+}
+
+.pannello label {
+  font-size: 1.2rem;
+}
+
+.pannello .form-control-lg {
+  font-size: 1.3rem;
+  height: calc(1.5em + 1.5rem);
+}
+
+.anteprima {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+#btnChiedi {
+  font-size: 1.6rem;
+}
+
+.storico {
+  max-height: 22rem;
+  overflow-y: auto;
+  font-size: 1.3rem;
+}
+
+.storico .list-group-item {
+  padding: 0.8rem 1.5rem;
+}
+
+.storico .badge {
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
 }
