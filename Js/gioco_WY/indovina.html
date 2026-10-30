@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Indovina <i class="fa fa-child" aria-hidden="true"></i></title>
+  <title>Indovina Chi?<i class="fa fa-child" aria-hidden="true"></i></title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,7 +17,7 @@
   <html lang="en">
 
   <head>
-    <title>Indovina Chi? - 8 per Riga</title>
+    <title>Indovina Chi?</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -63,7 +63,7 @@
   <body class="bg-light">
 
     <div class="container-fluid py-4">
-      <h1 class="text-center mb-4">Indovina <i class="fa fa-child text-primary" aria-hidden="true"></i></h1>
+      <h1 class="text-center mb-4">Indovina Chi?<i class="fa fa-child text-primary" aria-hidden="true"></i></h1>
 
       <!-- Griglia dei 24 Personaggi (8 per riga su PC) -->
       <div class="row no-gutters px-2">
@@ -322,14 +322,22 @@
                 </div>
                 <div class="card-body p-4">
                   <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-11">
                       <label for="selDomanda" class="font-weight-bold">Caratteristica</label>
-                      <select id="selDomanda" class="form-control form-control-lg"></select>
+                      <select id="selDomanda" class="form-control form-control-lg" required>
+                        <option value="" disabled selected hidden>Inserisci una caratteristica da chiedere</option>
+                        <option value="capelli">Capelli</option>
+                        <option value="barba">Barba</option>
+                        <option value="occhi">Occhi</option>
+                        <option value="occhiali">Occhiali</option>
+                        <option value="cappello">Cappello</option>
+                        <option value="baffi">Baffi</option>
+                        <option value="orecchini">Orecchini</option>
+                        <option value="collana">Collana</option>
+                        <option value="naso">Naso</option>
+                      </select>
                     </div>
-                    <div class="form-group col-md-6" id="gruppoValore">
-                      <label for="selValore" class="font-weight-bold">Valore</label>
-                      <select id="selValore" class="form-control form-control-lg"></select>
-                    </div>
+
                   </div>
 
                   <p class="anteprima text-muted" id="anteprima"></p>

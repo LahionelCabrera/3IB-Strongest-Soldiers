@@ -618,25 +618,26 @@ for (let i = 0; i < personaggi.length; i++) {
 
 const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length));
 const api=new API;
-
-let utente="marco"; //document.getElementById("utente").innerText;
-
-/*
-//ancora da implementare
-const domande=document.getElementById("domande");
-
-//in base alla domanda che premi invia una mossa diversa
-domande.addEventListener('click', ()=>{
-
-
-})*/
-
 let pref_ut="indovina_";
-//let partite=api.avaiabled_games().dati;
-//console.log(partite);
+let utente=pref_ut + document.getElementById("nomeUtente").innerText;
 
-let btn_gioca=document.getElementById("btn_gioca")
+let btn_gioca=document.getElementById("btn_gioca");
+let btn_domanda=document.getElementById("selDomanda");
+let btn_val_domanda=document.getElementById("selValore");
+let btn_id=document.getElementById("idUtente");
+
 let id_partita;
+
+btn_id.addEventListener("input", ()=>{
+  id_partita=parseInt(btn_id.value);
+  if(api.gioca(utente).then(json => {
+        return json.data.id;
+    })
+    .catch(error => console.error(error))!=id_partita)
+    btn_id.innerText="ID SBAGLIATO";
+
+})
+
 
 api.creaGioco(utente)
     .then(json => {
@@ -644,14 +645,3 @@ api.creaGioco(utente)
         console.log(id_partita);
     })
     .catch(error => console.error(error));
-
-// btn_gioca.addEventListener('click', ()=>{
-//   for(let i=0; i<partite.length; i++){
-//     if(partite[i].PLAYER1.includes(pref_ut) && partite[i].PLAYER2==NULL)
-//       id_partita=partite[i].ID;  
-//       return;
-//   }
-//   api.creaGioco()
-
-
-// })
