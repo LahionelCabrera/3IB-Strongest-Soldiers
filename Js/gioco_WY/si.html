@@ -40,11 +40,18 @@
           </div>
 
           <div class="form-group text-left">
-            <label for="idUtente" class="font-weight-bold">ID <small class="text-muted">(facoltativo)</small></label>
-            <input type="text" id="idUtente" name="id" class="form-control form-control-lg" placeholder="Inserisci l'ID" id="ID">
+            <label for="idUtente" class="font-weight-bold">
+              ID <small class="text-muted">(facoltativo)</small>
+            </label>
+
+            <input type="text" id="idUtente" name="id" class="form-control form-control-lg"
+              placeholder="Inserisci l'ID">
+
+            <small id="erroreId" class="text-danger"></small>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 py-3" style="font-size: 2rem;" title="gioca" id="btn_gioca">
+          <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 py-3" style="font-size: 2rem;"
+            title="gioca" id="btn_gioca">
             <i class="fa fa-play" aria-hidden="true"></i> Gioca
           </button>
 
