@@ -616,14 +616,13 @@ for (let i = 0; i < personaggi.length; i++) {
   ));
 }
 
-const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length));
 const api = new API;
 let pref_ut = "indovina_";
 let utente;
 
+const btn_chiedi=document.getElementById("btnChiedi");
 const btn_gioca = document.getElementById("btn_gioca");
-const btn_domanda = document.getElementById("selDomanda");
-const btn_val_domanda = document.getElementById("selValore");
+const sel_domanda = document.getElementById("selDomanda");
 const inputId = document.getElementById("idUtente");
 const erroreId = document.getElementById("erroreId");
 const inputNome = document.getElementById("nomeUtente");
@@ -632,35 +631,103 @@ const form = document.getElementById("formGioca");
 let id_partita;
 
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  erroreId.innerText = "";
+if (form) {
+  // ===== SOLO si.html =====
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    erroreId.innerText = "";
 
-  utente = pref_ut + encodeURIComponent(inputNome.value.trim());
+    utente = pref_ut + encodeURIComponent(inputNome.value.trim());
 
-  try {
-    if (inputId.value.trim() === "") {
-      // nessun ID: creo una nuova partita
-      const json = await api.creaGioco(utente);
-      id_partita = json.data.id;
+    try {
+      if (inputId.value.trim() === "") {
+        const partite = await api.avaiabled_games();
 
-    } else {
-      // ID inserito: mi unisco
-      const id = parseInt(inputId.value, 10);
+        //find cerca e restituisce il primo risultato
+        const libera = partite.data.find(p =>
+          //se trova il player1 e player1 inizia con indovina_
+          p.PLAYER1 && p.PLAYER1.startsWith(pref_ut)
+          //&& p.PLAYER1 !== utente && !p.PLAYER2 //non serve perchè avaiabled games restituisce solo i game con 1 giocatore
+        );
 
-      //isNaN restituisce true se il valore è numerico
-      if (isNaN(id)) throw new Error("ID non numerico");
+        if (libera) {
+          await api.gioca(libera.ID, utente);
+          id_partita = libera.ID;
+        } else {
+          const json = await api.creaGioco(utente);
+          id_partita = json.data.id;
+        }
+      } else {
+        //id inserito
+        const id = parseInt(inputId.value);
+        if (isNaN(id)) throw new Error("ID non numerico");
 
-      const json = await api.gioca(id, utente);
-      if (Number(json.data.id) != id) throw new Error("ID non valido");
-      id_partita = id;
+        const json = await api.gioca(id, utente);
+        if (Number(json.data.id) !== id) throw new Error("ID non valido");
+        id_partita = id;
+        console.log(id_partita);
+      }
+
+      window.location.href = "indovina.html?nome=" + encodeURIComponent(inputNome.value.trim()) + "&id=" + id_partita;
+    } catch (err) {
+      console.error(err);
+      erroreId.innerText = "ERRORE: ID non valido o partita non trovata";
     }
+  });
 
-    window.location.href =
-      "indovina.html?nome=" + encodeURIComponent(inputNome.value.trim()) +
-      "&id=" + id_partita;
-  } catch (err) {
-    console.error(err);
-    erroreId.innerText = "ERRORE: ID non valido o partita non trovata";
+}
+else {
+
+  // ===== SOLO indovina.html =====
+  const params = new URLSearchParams(window.location.search);
+  utente = pref_ut + encodeURIComponent(params.get("nome") || "");
+  id_partita = params.get("id");
+
+  let mosse=await api.game_moves(id_partita);
+  mosse=mosse.data.moves;
+
+  let mossa={
+    risposta,
+    domanda
   }
-});
+
+  btn_chiedi.addEventListener('click', ()=>{
+    mossa.domandadomanda=sel_domanda.value;
+    mossa.risposta=
+
+  })
+
+  console.log("Partita:", id_partita, "Giocatore:", utente);
+
+  const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length));
+
+  // document.getElementById("{id_personaggio}").sfondo=yellow;
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+/*DA FARE:
+-mettere la possibilità delle partite private mettendo al nome utente che la crea il prefisso private
+
+-salvarsi in locale l'id della partita ed il personaggio associato al nome utente 
+inoltre fare in modo che se la partita viene chiusa all'improvviso si riacceda ai dati (tutto con local storage)
+
+-creare un bottone per eliminare i dati salvati in storage così da poter entrare in un'altra partita
+
+*/
