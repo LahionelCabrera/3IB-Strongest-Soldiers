@@ -627,6 +627,8 @@ const inputId = document.getElementById("idUtente");
 const erroreId = document.getElementById("erroreId");
 const inputNome = document.getElementById("nomeUtente");
 const form = document.getElementById("formGioca");
+const label_id = document.getElementById("infoIdPartita");
+const label_nome = document.getElementById("infoNome");
 
 let id_partita;
 
@@ -682,24 +684,58 @@ else {
   const params = new URLSearchParams(window.location.search);
   utente = pref_ut + encodeURIComponent(params.get("nome") || "");
   id_partita = params.get("id");
+  label_id.innerText =id_partita;
+  label_nome.innerText =utente;
+
+  const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length));
+  let ultima_mossa;
+    
+  
+
+  console.log("Partita:", id_partita, "Giocatore:", utente);
+
 
   let mosse=await api.game_moves(id_partita);
   mosse=mosse.data.moves;
 
+  const intervallo = setInterval(async () => {
+      try {
+          ultima_mossa = await api.last_move(id_partita);
+          ultima_mossa = ultima_mossa.data.play;
+
+          // Controlla se la mossa è nuova rispetto all'ultima salvata
+          if (mosse.length === 0 || ultima_mossa.id != mosse[mosse.length - 1].id) {
+              mosse.push(ultima_mossa);
+
+              // Aggiunge alla chat SOLO la nuova mossa appena arrivata
+              const chat = document.createElement("li");
+              chat.classList.add("list-group-item", "text-muted");
+              chat.innerText = ultima_mossa.player + ": la caratteristica richiesta è " + ultima_mossa.risposta;
+              chat.innerText += ultima_mossa.player + ": come è la caratteristica " + ultima_mossa.domanda;
+              document.getElementById("storico").appendChild(chat);
+          }
+      } catch (error) {
+          console.error("Errore nel recupero dell'ultima mossa:", error);
+      }
+  }, 10000);
   let mossa={
-    risposta,
-    domanda
+    risposta: "",
+    domanda: ""
   }
 
   btn_chiedi.addEventListener('click', ()=>{
-    mossa.domandadomanda=sel_domanda.value;
-    mossa.risposta=
+    mossa.domanda=sel_domanda.value;
+    mossa.risposta = arr_personaggi[id_personaggio][mosse[mosse.length - 1].domanda];
+    if(mossa.risposta===true) mossa.risposta="si";
+    if(mossa.risposta===false) mossa.risposta="no";
 
+    if(ultima_mossa.id===mosse[mosse.length - 1].id) 
+      return alert("Devi aspettare che l'altro giocatore faccia la sua mossa");
+    
+    api.mossa(id_partita, utente, mossa.stringfy())
   })
 
-  console.log("Partita:", id_partita, "Giocatore:", utente);
 
-  const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length));
 
   // document.getElementById("{id_personaggio}").sfondo=yellow;
 
@@ -722,12 +758,3 @@ else {
 
 }
 
-/*DA FARE:
--mettere la possibilità delle partite private mettendo al nome utente che la crea il prefisso private
-
--salvarsi in locale l'id della partita ed il personaggio associato al nome utente 
-inoltre fare in modo che se la partita viene chiusa all'improvviso si riacceda ai dati (tutto con local storage)
-
--creare un bottone per eliminare i dati salvati in storage così da poter entrare in un'altra partita
-
-*/
