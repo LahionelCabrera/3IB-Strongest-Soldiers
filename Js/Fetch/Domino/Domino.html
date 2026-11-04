@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -92,63 +92,23 @@
     </template>
 
 
-    <div id="TavoloGioco">
-      <div id="MazzoGiocatore2">
-        
- <div class="Domino">
-        <div class="sopra"></div>
-        <hr class="linea" />
-        <div class="sotto"></div>
-      </div>
-        </div>
-      </div>
+    <div id="menu-principale">
+      <section class="pannello-menu" aria-labelledby="titolo-menu">
+        <h1 id="titolo-menu">Domino</h1>
+        <p>Scegli un nome per iniziare.</p>
 
-      <div id="MazzoGiocatore1">
-        <div class="Domino">
-        <div class="sopra"><div class="Quadretti">
-      </div></div>
-        <hr class="linea" />
-        <div class="sotto"><div class="Quadretti">
-      </div></div>
-      </div>
-        <div class="Domino">
-          <div class="sopra">
-            <div class="Quadretti D1">
-              <div class="Pallina"></div>
-            </div>
-          </div>
-          <hr class="linea" />
-          <div class="sotto">
-            <div class="Quadretti D2">
-              <div class="Pallina"></div>
-              <div class="Pallina"></div>
-            </div>
-          </div>
+        <label for="username">Nome</label>
+        <input id="username" type="text" placeholder="Il tuo nome" maxlength="24" autocomplete="nickname" />
+        <button id="gioca" type="button" onclick="iniziaGioco()">Gioca</button>
+
+        <label for="id">ID partita (facoltativo)</label>
+        <div class="riga-join">
+          <input id="id" type="text" placeholder="ID partita" autocomplete="off" />
+          <button id="join" type="button" onclick="joinGioco()">Join</button>
         </div>
-        <div class="Domino">
-          <div class="sopra">
-            <div class="Quadretti D1">
-              <div class="Pallina"></div>
-            </div>
-          </div>
-          <hr class="linea" />
-          <div class="sotto">
-            <div class="Quadretti D2">
-              <div class="Pallina"></div>
-              <div class="Pallina"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <p id="messaggio" role="status" aria-live="polite"></p>
+      </section>
     </div>
-
-
-
-<input id="username" type="text" placeholder="Inserisci il tuo nome" />
-<button id="gioca" onclick="iniziaGioco()">GIOCA</button>
-
-<input id="id" type="text" placeholder="Inserisci l'ID della partita" />
-<button id="gioca" onclick="joinGioco()">JOIN</button>
 
 
     

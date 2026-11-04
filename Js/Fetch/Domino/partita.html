@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Partita di domino</title>
+  </head>
+  <body>
+    <template id="domino">
+      <div class="Domino">
+        <div class="sopra"></div>
+        <hr class="linea" />
+        <div class="sotto"></div>
+      </div>
+    </template>
+
+    <template id="d0"><div class="Quadretti"></div></template>
+    <template id="d1"><div class="Quadretti D1"><div class="Pallina"></div></div></template>
+    <template id="d2"><div class="Quadretti D2"><div class="Pallina"></div><div class="Pallina"></div></div></template>
+    <template id="d3"><div class="Quadretti D3"><div class="Pallina"></div><div class="Pallina"></div><div class="Pallina"></div></div></template>
+    <template id="d4"><div class="Quadretti D4"><div class="Pallina"></div><div class="Pallina"></div><div class="Pallina"></div><div class="Pallina"></div></div></template>
+    <template id="d5"><div class="Quadretti D5"><div class="Pallina"></div><div class="Pallina"></div><div class="Pallina PD5"></div><div class="Pallina"></div><div class="Pallina"></div></div></template>
+    <template id="d6"><div class="Quadretti D6"><div class="Pallina"></div><div class="Pallina"></div><div class="Pallina"></div><div class="Pallina"></div><div class="Pallina"></div><div class="Pallina"></div></div></template>
+
+    <header class="game-header">
+      <a class="menu-link" href="Domino.html">Menu</a>
+      <div id="id-partita" class="identificativo">ID PARTITA <strong id="valore-id">-</strong></div>
+    </header>
+
+    <aside id="players-panel" aria-label="Giocatori della partita">
+      <h2>Giocatori</h2>
+      <ol id="players-list"></ol>
+    </aside>
+
+    <div id="game-status" role="status" aria-live="polite">Caricamento partita...</div>
+    <div id="spectator-status" hidden></div>
+
+    <section id="game-table" aria-label="Tavolo da domino">
+      <div id="chain" aria-live="polite"></div>
+      <div class="turn-actions">
+        <button id="play-left" type="button" disabled>Piazza a sinistra</button>
+        <button id="play-right" type="button" disabled>Piazza a destra</button>
+        <button id="draw-tile" type="button" hidden disabled>Pesca tessera</button>
+        <button id="pass-turn" type="button" disabled>Passa</button>
+      </div>
+      <p id="game-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="hand-panel" aria-label="La tua mano">
+      <h2>Le tue tessere</h2>
+      <div id="hand"></div>
+    </section>
+    <script src="partita.js"></script>
+  </body>
+</html>
