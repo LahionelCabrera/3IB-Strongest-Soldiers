@@ -714,7 +714,6 @@ else {
     }
 
     let cardSelezionata;
-    let timeoutSelezione;
 
     //funzione per mettere le x sui personaggi
     finocchio.addEventListener("click", (e) => {
@@ -723,16 +722,17 @@ else {
       if (sel_domanda.value === "personaggio") {
         mossa.domanda = Number(card.id);
         cardSelezionata?.classList.remove("invia-personaggio");
-        clearTimeout(timeoutSelezione);
         cardSelezionata = card;
         card.classList.add("invia-personaggio");
-        timeoutSelezione = setTimeout(() => {
-          card.classList.remove("invia-personaggio");
-          cardSelezionata = null;
-        }, 1500);
       } else {
         card.classList.toggle("scartato");
       }
+    });
+
+    sel_domanda.addEventListener("change", () => {
+      cardSelezionata?.classList.remove("invia-personaggio");
+      cardSelezionata = null;
+      mossa.domanda = "";
     });
     
     const params = new URLSearchParams(window.location.search);
@@ -815,7 +815,7 @@ else {
       let testo = "";
 
       if (m.risposta === "VITTORIA") {
-        // m.player ha risposto "VITTORIA" => il suo personaggio è stato indovinato => ha PERSO
+        // m.player ha risposto "VITTORIA" = il suo personaggio è stato indovinato = ha PERSO
         const iHoVinto = !sono_io(m.player);
         testo = iHoVinto
           ? `<strong><u>HAI VINTO</u></strong>`
@@ -823,14 +823,14 @@ else {
         chat.innerHTML = testo;
         document.getElementById("storico").appendChild(chat);
         vittoria = true;
-        return alert(iHoVinto ? "HAI VINTO🏆" : "Hai perso 😢");
+        return alert(iHoVinto ? "HAI VINTO🏆" : "Hai perso, UTENTE DEMENTE");
       }
 
       if (m.risposta !== "") {
         testo += `<strong>${m.player}</strong>: risposta = <u>${m.risposta}</u><br>`;
       }
       if (typeof m.domanda === "number") {
-        testo += `<strong>${m.player}</strong>: pensa che il personaggio sia ${arr_personaggi[m.domanda].nome}</u>`;
+        testo += `<strong>${m.player}</strong>: pensa che il personaggio sia ${arr_personaggi[m.domanda].nome}`;
       } else {
         testo += `<strong>${m.player}</strong>: come è la caratteristica ${m.domanda}`;
       }
@@ -943,6 +943,9 @@ else {
         };
         mosse.push(mia);
         aggiungiInChat(mia);
+        cardSelezionata?.classList.remove("invia-personaggio");
+        cardSelezionata = null;
+        mossa.domanda = "";
         sel_domanda.value = "";
       } catch (err) {
         console.error(err);
