@@ -174,3 +174,44 @@ h1 i {
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
 }
+
+#griglia {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.card {
+  position: relative;
+  cursor: pointer;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 6px;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+/* Card scartata: più opaca + croce rossa */
+.card.scartato {
+  opacity: 0.5;
+}
+
+.card.scartato::before,
+.card.scartato::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 6px;
+  background: red;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.card.scartato::before { transform: translate(-50%, -50%) rotate(45deg); }
+.card.scartato::after  { transform: translate(-50%, -50%) rotate(-45deg); }

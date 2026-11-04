@@ -697,6 +697,18 @@ if (form) {
 
 }
 else {
+  
+  let vittoria=false;
+  
+  //griglia con i personaggi
+  const finocchio = document.getElementById("finocchio");
+
+  //funzione per mettere le x sui personaggi
+  finocchio.addEventListener("click", (e) => {
+    const card = e.target.closest(".card");
+    if (!card) return;
+    card.classList.toggle("scartato");
+  });
 
   //in una funzione async per poter utilizzare await
   (async () => {
@@ -752,8 +764,15 @@ else {
       if (!m) return null;
       let contenuto = m.MOSSA;
       try {
-        if (typeof contenuto === "string") contenuto = JSON.parse(contenuto);
+        if (typeof contenuto === "string") {
+          try {
+            contenuto = JSON.parse(contenuto);                      // caso "normale": {"risposta":...}
+          } catch (e) {
+            contenuto = JSON.parse(decodeURIComponent(contenuto));  // caso tuo: %7B%22risposta%22...
+          }
+        }
       } catch (err) {
+        console.warn("Mossa non leggibile:", m);
         return null;
       }
       if (!contenuto || typeof contenuto !== "object") return null;
@@ -768,21 +787,30 @@ else {
     //tenuta in una funzione per usarla sia per le mosse dell'avversario
     //sia per le mie e per mostrare lo storico al caricamento della pagina
     function aggiungiInChat(m) {
-      const chat = document.createElement("li");
-      chat.classList.add("list-group-item", "text-muted");
+    const chat = document.createElement("li");
+    chat.classList.add("list-group-item", "text-muted");
 
-      let testo = "";
-      // la risposta è vuota solo nella prima mossa della partita
-      if (m.risposta !== "") {
-        testo += m.player + ": la caratteristica richiesta è " + m.risposta + "\n";
-      }
-      testo += m.player + ": come è la caratteristica " + m.domanda;   // FIX: prima era incollato senza separatore
-      chat.innerText = testo;
+    let testo = "";
 
-      document.getElementById("storico").appendChild(chat);
-      contatore.innerText = mosse.length + (mosse.length === 1 ? " domanda" : " domande");
+    if(m.risposta === "VITTORIA")
+      testo += `<strong>${utenteDec} <u>HA VINTO</u> </strong><br>`;
+
+    else if (m.risposta !== "") {
+        testo += `<strong>${m.player}</strong>: risposta = <u>${m.risposta}</u><br>`;
+        testo += `<strong>${m.player}</strong>: come è la caratteristica ${m.domanda}<br>`;
     }
 
+    chat.innerHTML = testo;
+
+    document.getElementById("storico").appendChild(chat);
+    if(m.risposta === "VITTORIA"){
+      vittoria=true;
+      return alert("HAI VINTO🏆");
+    }
+    contatore.innerText = mosse.length + (mosse.length === 1 ? " domanda" : " domande");
+  }
+
+    //riempire l'array di mosse
     let mosse = [];
     try {
       const risposta = await api.game_moves(id_partita);
@@ -831,6 +859,8 @@ else {
 
     btn_chiedi.addEventListener('click', async () => {
 
+      if(vittoria)
+        return alert ("partita conclusa")
         //se non è stata scelta una caratteristica da chiedere da un alert
         if (!sel_domanda.value) {
         return alert("Scegli prima una caratteristica da chiedere");
@@ -847,8 +877,18 @@ else {
       mossa.risposta = "";
       if (ultima) {
         mossa.risposta = arr_personaggi[id_personaggio].caratteristiche[ultima.domanda];
-        if (mossa.risposta === true) mossa.risposta = "si";
-        if (mossa.risposta === false) mossa.risposta = "no";
+
+        if(typeof mossa.risposta === "number")
+          if(mossa.risposta===id_personaggio){
+            mossa.risposta="VITTORIA";
+            vittoria=true;
+          }
+          else
+            mossa.risposta="SBAGLIATA";
+
+        if (mossa.risposta === true) mossa.risposta = "presente";
+        if (mossa.risposta === false) mossa.risposta = "assente";
+
       }
 
       btn_chiedi.disabled = true;   //evita invii doppi
