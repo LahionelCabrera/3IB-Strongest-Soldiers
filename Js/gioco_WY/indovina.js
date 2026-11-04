@@ -313,184 +313,448 @@ const personaggi = [
   }
 ];
 
+
 class API {
-    constructor() {
-        this.username = "4IB";
-        this.password = "CRIPPA";
-        this.urlbase = "https://classe5id.altervista.org/games/";
-    }
+  // constructor() {
+  //     this.username = "4IB";
+  //     this.password = "CRIPPA";
+  //     this.urlbase = "https://classe5id.altervista.org/games/";
+  // }
 
-    //restituisce l'id della partita
-    async creaGioco(utente) {
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
+  //restituisce l'id della partita
+  async creaGioco(utente) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
-        const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          redirect: "follow"
-        };
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      redirect: "follow"
+    };
 
-        fetch("https://classe5ID.altervista.org/games/partita/", requestOptions)
-          .then((response) => response.text())
-          .then((result) => console.log(result))
-          .catch((error) => console.error(error));
-    }
+    return fetch("https://classe5ID.altervista.org/games/partita/" + utente, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+        return response.json();
+        /*{
+            "method": "POST",
+            "action": "New match created",
+            "data": {
+                "id": 53436
+            }
+          }*/
+      })
+  }
 
-    //restituisce l'id della partita a cui ti sei unito
-    async gioca(ID,utente) {
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
+  //restituisce l'id della partita a cui ti sei unito
+  async gioca(ID, utente) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
-        const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          redirect: "follow"
-        };
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      redirect: "follow"
+    };
 
-        fetch("https://classe5ID.altervista.org/games/join/", requestOptions)
-          .then((response) => response.text())
-          .then((result) => console.log(result))
-          .catch((error) => console.error(error));
-    }
+    return fetch("https://classe5ID.altervista.org/games/join/" + ID + "/" + utente, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+        return response.json();
+        /*{
+            "method": "POST",
+            "action": "connected to the match",
+            "data": {
+                "id": "53436",
+                "player": "ut"
+            }
+        }*/
+      })
+  }
 
-    //restituisce la move's id
-    async mossa(ID,utente,mossa) {
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
+  //restituisce la move's id
+  async mossa(ID, utente, mossa) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        redirect: "follow"
-      };
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      redirect: "follow"
+    };
 
-      fetch("https://classe5ID.altervista.org/games/mossa/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));    
-      
-    }
-    
+    return fetch("https://classe5ID.altervista.org/games/mossa/" + ID + "/" + utente + "/" + mossa, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+        return response.json();
+        /*{
+          "method": "POST",
+          "action": "Insert your play",
+          "data": {
+              "id_partita": "53376",
+              "player": "dominoGabboJiale",
+              "mossa": "u_7",
+              "id": 116840
+          }
+        }*/
+      })
 
-    //restituisce la lista di partite disponibili
-    async avaiabled_games() {
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
+  }
 
-      const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
-      };
 
-      fetch("https://classe5ID.altervista.org/games/partita", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    }
+  //restituisce la lista di partite disponibili
+  async avaiabled_games() {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
-    //restituisce una lista di partite che ha un quantitativo n di giocatori
-    async avaiabled_games_n(n) {
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
 
-      const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
-      };
+    return fetch("https://classe5ID.altervista.org/games/partita", requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
 
-      fetch("https://classe5ID.altervista.org/games/partitaN/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    }
+        return response.json();
+        /*{
+          /*"method": "GET",
+          "action": "matches avaiable",
+          "data": [
+              {
+                  "ID": "53433",
+                  "CREATED_AT": "2026-10-29 10:55:05",
+                  "PLAYER1": "undefined",
+                  "PLAYER2": null,
+                  "PLAYER3": null,
+                  "PLAYER4": null,
+                  "PLAYER5": null,
+                  "PLAYER6": null,
+                  "PLAYER7": null
+              },
+              {
+                  "ID": "53432",
+                  "CREATED_AT": "2026-10-29 10:55:04",
+                  "PLAYER1": "undefined",
+                  "PLAYER2": null,
+                  "PLAYER3": null,
+                  "PLAYER4": null,
+                  "PLAYER5": null,
+                  "PLAYER6": null,
+                  "PLAYER7": null
+      }}*/
+      })
+  }
 
-    //restituisce l'ultima mossa
-    async last_move(ID){
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
+  //restituisce una lista di partite che ha un quantitativo n-1 di giocatori
+  async avaiabled_games_n(n) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
-      const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
-      };
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
 
-      fetch("https://classe5ID.altervista.org/games/mossa/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    }
+    return fetch("https://classe5ID.altervista.org/games/partitaN/" + n, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
 
-    //restituisce la lista delle mosse
-    async game_moves(ID) {
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
+        return response.json();
+        /*{
+            /*"method": "GET",
+            "action": "matches avaiable",
+            "data": [
+                {
+                    "ID": "53433",
+                    "CREATED_AT": "2026-10-29 10:55:05",
+                    "PLAYER1": "undefined",
+                    "PLAYER2": null,
+                    "PLAYER3": null,
+                    "PLAYER4": null,
+                    "PLAYER5": null,
+                    "PLAYER6": null,
+                    "PLAYER7": null
+                },
+                {
+                    "ID": "53432",
+                    "CREATED_AT": "2026-10-29 10:55:04",
+                    "PLAYER1": "undefined",
+                    "PLAYER2": null,
+                    "PLAYER3": null,
+                    "PLAYER4": null,
+                    "PLAYER5": null,
+                    "PLAYER6": null,
+                    "PLAYER7": null
+        }}*/
+      })
+  }
 
-      const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
-      };
+  //restituisce l'ultima mossa
+  async last_move(ID) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
-      fetch("https://classe5ID.altervista.org/games/mosse/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    }
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
 
-   
+    return fetch("https://classe5ID.altervista.org/games/mossa/" + ID, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+
+        return response.json();
+        /*{
+          "method": "GET",
+          "action": "Last move",
+          "data": {
+              "id_partita": "53376",
+              "play": {
+                  "ID": 116840,
+                  "MOSSA": "u_7",
+                  "PLAYER": "dominoGabboJiale",
+                  "GAME": 53376
+              }
+          }
+        }*/
+      });
+  }
+
+  //restituisce la lista delle mosse
+  async game_moves(ID) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic NElCOkNSSVBQQQ==");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    return fetch("https://classe5ID.altervista.org/games/mosse/" + ID, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore HTTP " + response.status);
+        }
+
+        return response.json();
+        /*{
+          "method": "GET",
+          "action": "All moves",
+          "data": {
+              "id_partita": "53376",
+              "moves": [
+                  {
+                      "ID": 116840,
+                      "MOSSA": "u_7",
+                      "PLAYER": "dominoGabboJiale",
+                      "GAME": 53376
+                  },
+                  {
+                      "ID": 116745,
+                      "MOSSA": "u_7",
+                      "PLAYER": "dominoGabboJiale",
+                      "GAME": 53376
+                  }
+              ]
+          }
+        }*/
+      });
+  }
+
 }
 
 class Personaggi {
-    constructor(id, nome, capelli, barba, occhi, occhiali, cappello, baffi, orecchini, collana, naso) {
-        this.id = id;
-        this.nome = nome;
-        this.caratteristiche = {
-            capelli: capelli,
-            barba: barba,
-            occhi: occhi,
-            occhiali: occhiali,
-            cappello: cappello,
-            baffi: baffi,
-            orecchini: orecchini,
-            collana: collana,
-            naso: naso
-        };
-    }                                                                                                                                                                                                                                                               
+  constructor(id, nome, capelli, barba, occhi, occhiali, cappello, baffi, orecchini, collana, naso) {
+    this.id = id;
+    this.nome = nome;
+    this.caratteristiche = {
+      capelli: capelli,
+      barba: barba,
+      occhi: occhi,
+      occhiali: occhiali,
+      cappello: cappello,
+      baffi: baffi,
+      orecchini: orecchini,
+      collana: collana,
+      naso: naso
+    };
+  }
 }
 
 let arr_personaggi = [];
 //riempi array personaggi
 for (let i = 0; i < personaggi.length; i++) {
-    arr_personaggi.push(new Personaggi(
-        personaggi[i].id,
-        personaggi[i].nome,
-        personaggi[i].capelli,
-        personaggi[i].barba,
-        personaggi[i].occhi,
-        personaggi[i].occhiali,
-        personaggi[i].cappello,
-        personaggi[i].baffi,
-        personaggi[i].orecchini,
-        personaggi[i].collana,
-        personaggi[i].naso
-    ));
+  arr_personaggi.push(new Personaggi(
+    personaggi[i].id,
+    personaggi[i].nome,
+    personaggi[i].capelli,
+    personaggi[i].barba,
+    personaggi[i].occhi,
+    personaggi[i].occhiali,
+    personaggi[i].cappello,
+    personaggi[i].baffi,
+    personaggi[i].orecchini,
+    personaggi[i].collana,
+    personaggi[i].naso
+  ));
 }
 
-const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length));
-const api=new API;
+const api = new API;
+let pref_ut = "indovina_";
+let utente;
 
-let utente="marco"; //document.getElementById("utente").innerText;
+const btn_chiedi=document.getElementById("btnChiedi");
+const btn_gioca = document.getElementById("btn_gioca");
+const sel_domanda = document.getElementById("selDomanda");
+const inputId = document.getElementById("idUtente");
+const erroreId = document.getElementById("erroreId");
+const inputNome = document.getElementById("nomeUtente");
+const form = document.getElementById("formGioca");
+const label_id = document.getElementById("infoIdPartita");
+const label_nome = document.getElementById("infoNome");
 
-/*
-//ancora da implementare
-const domande=document.getElementById("domande");
-
-//in base alla domanda che premi invia una mossa diversa
-domande.addEventListener('click', ()=>{
+let id_partita;
 
 
-})*/
+if (form) {
+  // ===== SOLO si.html =====
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    erroreId.innerText = "";
+
+    utente = pref_ut + encodeURIComponent(inputNome.value.trim());
+
+    try {
+      if (inputId.value.trim() === "") {
+        const partite = await api.avaiabled_games();
+
+        //find cerca e restituisce il primo risultato
+        const libera = partite.data.find(p =>
+          //se trova il player1 e player1 inizia con indovina_
+          p.PLAYER1 && p.PLAYER1.startsWith(pref_ut)
+          //&& p.PLAYER1 !== utente && !p.PLAYER2 //non serve perchè avaiabled games restituisce solo i game con 1 giocatore
+        );
+
+        if (libera) {
+          await api.gioca(libera.ID, utente);
+          id_partita = libera.ID;
+        } else {
+          const json = await api.creaGioco(utente);
+          id_partita = json.data.id;
+        }
+      } else {
+        //id inserito
+        const id = parseInt(inputId.value);
+        if (isNaN(id)) throw new Error("ID non numerico");
+
+        const json = await api.gioca(id, utente);
+        if (Number(json.data.id) !== id) throw new Error("ID non valido");
+        id_partita = id;
+        console.log(id_partita);
+      }
+
+      window.location.href = "indovina.html?nome=" + encodeURIComponent(inputNome.value.trim()) + "&id=" + id_partita;
+    } catch (err) {
+      console.error(err);
+      erroreId.innerText = "ERRORE: ID non valido o partita non trovata";
+    }
+  });
+
+}
+else {
+
+  // ===== SOLO indovina.html =====
+  const params = new URLSearchParams(window.location.search);
+  utente = pref_ut + encodeURIComponent(params.get("nome") || "");
+  id_partita = params.get("id");
+  label_id.innerText =id_partita;
+  label_nome.innerText =utente;
+
+  const id_personaggio = Math.floor(Math.random() * (arr_personaggi.length));
+  let ultima_mossa;
+    
+  
+
+  console.log("Partita:", id_partita, "Giocatore:", utente);
+
+
+  let mosse=await api.game_moves(id_partita);
+  mosse=mosse.data.moves;
+
+  const intervallo = setInterval(async () => {
+      try {
+          ultima_mossa = await api.last_move(id_partita);
+          ultima_mossa = ultima_mossa.data.play;
+
+          // Controlla se la mossa è nuova rispetto all'ultima salvata
+          if (mosse.length === 0 || ultima_mossa.id != mosse[mosse.length - 1].id) {
+              mosse.push(ultima_mossa);
+
+              // Aggiunge alla chat SOLO la nuova mossa appena arrivata
+              const chat = document.createElement("li");
+              chat.classList.add("list-group-item", "text-muted");
+              chat.innerText = ultima_mossa.player + ": la caratteristica richiesta è " + ultima_mossa.risposta;
+              chat.innerText += ultima_mossa.player + ": come è la caratteristica " + ultima_mossa.domanda;
+              document.getElementById("storico").appendChild(chat);
+          }
+      } catch (error) {
+          console.error("Errore nel recupero dell'ultima mossa:", error);
+      }
+  }, 10000);
+  let mossa={
+    risposta: "",
+    domanda: ""
+  }
+
+  btn_chiedi.addEventListener('click', ()=>{
+    mossa.domanda=sel_domanda.value;
+    mossa.risposta = arr_personaggi[id_personaggio][mosse[mosse.length - 1].domanda];
+    if(mossa.risposta===true) mossa.risposta="si";
+    if(mossa.risposta===false) mossa.risposta="no";
+
+    if(ultima_mossa.id===mosse[mosse.length - 1].id) 
+      return alert("Devi aspettare che l'altro giocatore faccia la sua mossa");
+    
+    api.mossa(id_partita, utente, mossa.stringfy())
+  })
+
+
+
+  // document.getElementById("{id_personaggio}").sfondo=yellow;
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
