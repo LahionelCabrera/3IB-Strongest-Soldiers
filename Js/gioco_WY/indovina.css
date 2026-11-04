@@ -196,6 +196,12 @@ h1 i {
   display: block;
 }
 
+.card.invia-personaggio {
+  outline: 4px solid #ffc107;
+  outline-offset: 2px;
+  z-index: 1;
+}
+
 /* Card scartata: più opaca + croce rossa */
 .card.scartato {
   opacity: 0.5;

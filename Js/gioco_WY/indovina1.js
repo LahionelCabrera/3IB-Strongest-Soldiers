@@ -703,15 +703,38 @@ else {
   //griglia con i personaggi
   const finocchio = document.getElementById("finocchio");
 
-  //funzione per mettere le x sui personaggi
-  finocchio.addEventListener("click", (e) => {
-    const card = e.target.closest(".card");
-    if (!card) return;
-    card.classList.toggle("scartato");
-  });
+  
 
   //in una funzione async per poter utilizzare await
   (async () => {
+
+    let mossa = {
+      risposta: "",
+      domanda: ""
+    }
+
+    let cardSelezionata;
+    let timeoutSelezione;
+
+    //funzione per mettere le x sui personaggi
+    finocchio.addEventListener("click", (e) => {
+      const card = e.target.closest(".card");
+      if (!card) return;
+      if (sel_domanda.value === "personaggio") {
+        mossa.domanda = Number(card.id);
+        cardSelezionata?.classList.remove("invia-personaggio");
+        clearTimeout(timeoutSelezione);
+        cardSelezionata = card;
+        card.classList.add("invia-personaggio");
+        timeoutSelezione = setTimeout(() => {
+          card.classList.remove("invia-personaggio");
+          cardSelezionata = null;
+        }, 1500);
+      } else {
+        card.classList.toggle("scartato");
+      }
+    });
+    
     const params = new URLSearchParams(window.location.search);
     const nome = (params.get("nome") || "").trim();
     id_partita = params.get("id");
@@ -766,9 +789,9 @@ else {
       try {
         if (typeof contenuto === "string") {
           try {
-            contenuto = JSON.parse(contenuto);                      // caso "normale": {"risposta":...}
+            contenuto = JSON.parse(contenuto);                      //caso normale: {"risposta":...}
           } catch (e) {
-            contenuto = JSON.parse(decodeURIComponent(contenuto));  // caso tuo: %7B%22risposta%22...
+            contenuto = JSON.parse(decodeURIComponent(contenuto));  //caso: %7B%22risposta%22...
           }
         }
       } catch (err) {
@@ -787,28 +810,35 @@ else {
     //tenuta in una funzione per usarla sia per le mosse dell'avversario
     //sia per le mie e per mostrare lo storico al caricamento della pagina
     function aggiungiInChat(m) {
-    const chat = document.createElement("li");
-    chat.classList.add("list-group-item", "text-muted");
+      const chat = document.createElement("li");
+      chat.classList.add("list-group-item", "text-muted");
+      let testo = "";
 
-    let testo = "";
+      if (m.risposta === "VITTORIA") {
+        // m.player ha risposto "VITTORIA" => il suo personaggio è stato indovinato => ha PERSO
+        const iHoVinto = !sono_io(m.player);
+        testo = iHoVinto
+          ? `<strong><u>HAI VINTO</u></strong>`
+          : `<strong><u>HAI PERSO</u></strong>: l'avversario ha indovinato il tuo personaggio`;
+        chat.innerHTML = testo;
+        document.getElementById("storico").appendChild(chat);
+        vittoria = true;
+        return alert(iHoVinto ? "HAI VINTO🏆" : "Hai perso 😢");
+      }
 
-    if(m.risposta === "VITTORIA")
-      testo += `<strong>${utenteDec} <u>HA VINTO</u> </strong><br>`;
-
-    else if (m.risposta !== "") {
+      if (m.risposta !== "") {
         testo += `<strong>${m.player}</strong>: risposta = <u>${m.risposta}</u><br>`;
-        testo += `<strong>${m.player}</strong>: come è la caratteristica ${m.domanda}<br>`;
-    }
+      }
+      if (typeof m.domanda === "number") {
+        testo += `<strong>${m.player}</strong>: pensa che il personaggio sia ${arr_personaggi[m.domanda].nome}</u>`;
+      } else {
+        testo += `<strong>${m.player}</strong>: come è la caratteristica ${m.domanda}`;
+      }
 
-    chat.innerHTML = testo;
-
-    document.getElementById("storico").appendChild(chat);
-    if(m.risposta === "VITTORIA"){
-      vittoria=true;
-      return alert("HAI VINTO🏆");
+      chat.innerHTML = testo;
+      document.getElementById("storico").appendChild(chat);
+      contatore.innerText = mosse.length + (mosse.length === 1 ? " domanda" : " domande");
     }
-    contatore.innerText = mosse.length + (mosse.length === 1 ? " domanda" : " domande");
-  }
 
     //riempire l'array di mosse
     let mosse = [];
@@ -852,17 +882,15 @@ else {
       }
     }, 10000);
 
-    let mossa = {
-      risposta: "",
-      domanda: ""
-    }
+    
 
     btn_chiedi.addEventListener('click', async () => {
 
       if(vittoria)
         return alert ("partita conclusa")
+
         //se non è stata scelta una caratteristica da chiedere da un alert
-        if (!sel_domanda.value) {
+      if (!sel_domanda.value) {
         return alert("Scegli prima una caratteristica da chiedere");
       }
 
@@ -872,33 +900,41 @@ else {
         return alert("Devi aspettare che l'altro giocatore faccia la sua mossa");
       }
 
-      mossa.domanda = sel_domanda.value;
+      if (sel_domanda.value === "personaggio") {
+        if (typeof mossa.domanda !== "number") {
+          mossa.domanda = "personaggio";
+        }
+      } 
+      else {
+        mossa.domanda = sel_domanda.value;
+      }
 
       mossa.risposta = "";
       if (ultima) {
-        mossa.risposta = arr_personaggi[id_personaggio].caratteristiche[ultima.domanda];
+        if (typeof ultima.domanda === "number") {
+          mossa.risposta = ultima.domanda === id_personaggio ? "VITTORIA" : "ERRATO";
+        } else {
+          mossa.risposta = arr_personaggi[id_personaggio].caratteristiche[ultima.domanda];
 
-        if(typeof mossa.risposta === "number")
-          if(mossa.risposta===id_personaggio){
-            mossa.risposta="VITTORIA";
-            vittoria=true;
+          if (typeof mossa.risposta === "number") {
+            mossa.risposta = mossa.risposta === id_personaggio ? "VITTORIA" : "SBAGLIATA";
           }
-          else
-            mossa.risposta="SBAGLIATA";
 
-        if (mossa.risposta === true) mossa.risposta = "presente";
-        if (mossa.risposta === false) mossa.risposta = "assente";
-
+          if (mossa.risposta === true) mossa.risposta = "presente";
+          if (mossa.risposta === false) mossa.risposta = "assente";
+        }
       }
+      if (mossa.domanda === "personaggio")  
+          return alert("Errore: Selezionare un personaggio prima di chiedere chi è");
+        
 
       btn_chiedi.disabled = true;   //evita invii doppi
       try {
         //stringify per inviare il json
         const json = await api.mossa(id_partita, utente, encodeURIComponent(JSON.stringify(mossa)));
 
-        // FIX: la mia mossa non compariva fino al polling successivo (10 s) e nel frattempo
-        // si poteva inviare di nuovo. La aggiungo subito, con lo stesso id che userà il polling,
-        // così non viene duplicata.
+        
+        // aggiunta della propria mossa nell'array ed in chat
         const mia = {
           id: Number(json.data.id),
           player: utenteDec,
