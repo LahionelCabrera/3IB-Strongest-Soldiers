@@ -3,12 +3,6 @@ body {
   margin: 0px;
   scrollbar-width: none;
 }
-body {
-  min-height: 100vh;
-  background: rgb(0, 102, 0);
-}
-
-
 
 .Domino {
   width: 50px;
@@ -95,44 +89,14 @@ body {
   align-items: center;
   justify-items: center;
 }
-#TavoloGioco {
-  height: 100%;
-  width: 100%;
-}
-
-#MazzoGiocatore2 {
-  display: grid;
-  grid-auto-flow: column;
-  position: fixed;
-  top: 0%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-#MazzoGiocatore1 {
-  display: grid;
-  grid-auto-flow: column;
-  position: fixed;
-  bottom: 0%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-#menu{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-  background-color: white;
-}
-
 * {
   box-sizing: border-box;
 }
 
 body {
+  min-height: 100vh;
   color: #f4f0e5;
-  background-color: #124a3d;
+  background: #124a3d;
   font-family: "Trebuchet MS", "Avenir Next", sans-serif;
 }
 
@@ -453,11 +417,7 @@ label {
 }
 
 body:has(#game-table) {
-  min-height: 100vh;
   overflow: hidden;
-  color: #f4f0e5;
-  background-color: #124a3d;
-  background-image: repeating-linear-gradient(32deg, transparent 0 34px, rgb(255 255 255 / 2.5%) 35px 36px);
 }
 
 .game-header .menu-link {
