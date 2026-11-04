@@ -752,8 +752,15 @@ else {
       if (!m) return null;
       let contenuto = m.MOSSA;
       try {
-        if (typeof contenuto === "string") contenuto = JSON.parse(contenuto);
+        if (typeof contenuto === "string") {
+          try {
+            contenuto = JSON.parse(contenuto);                      // caso "normale": {"risposta":...}
+          } catch (e) {
+            contenuto = JSON.parse(decodeURIComponent(contenuto));  // caso tuo: %7B%22risposta%22...
+          }
+        }
       } catch (err) {
+        console.warn("Mossa non leggibile:", m);
         return null;
       }
       if (!contenuto || typeof contenuto !== "object") return null;
