@@ -3,139 +3,188 @@ headers.append("Authorization", "Basic NElCOkNSSVBQQQ==");
 
 const requestOptionsPost = {
   method: "POST",
-  headers,
-  redirect: "follow"
+  headers: headers
 };
 
 const requestOptionsGet = {
   method: "GET",
-  headers,
-  redirect: "follow"
+  headers: headers
 };
 
 const usernameInput = document.getElementById("username");
 const gameIdInput = document.getElementById("id");
 const message = document.getElementById("messaggio");
-const buttons = [document.getElementById("gioca"), document.getElementById("join")];
+const playButton = document.getElementById("gioca");
+const joinButton = document.getElementById("join");
 
 function setBusy(isBusy) {
-  buttons.forEach((button) => {
-    button.disabled = isBusy;
-  });
-  message.textContent = isBusy ? "Connessione..." : "";
+  playButton.disabled = isBusy;
+  joinButton.disabled = isBusy;
+
+  if (isBusy) {
+    message.textContent = "Connessione...";
+  } else if (message.textContent === "Connessione...") {
+    message.textContent = "";
+  }
 }
 
 function getUsername() {
   const name = usernameInput.value.trim();
-  if (!name) {
+
+  if (name === "") {
     message.textContent = "Inserisci il tuo nome.";
-    usernameInput.focus();
-    return null;
+    return "";
   }
-  return `domino${name}`;
+
+  return "domino" + name;
 }
 
-async function readResponse(response) {
-  let result;
-  try {
-    result = await response.json();
-  } catch {
-    throw new Error("Il server ha restituito una risposta non valida.");
-  }
-  if (!response.ok) {
-    throw new Error(result.message || `Errore HTTP ${response.status}`);
-  }
-  return result;
+function readResponse(response) {
+  return response.json().then(function(result) {
+    if (!response.ok) {
+      if (result.message) {
+        console.log(result.message);
+      } else {
+        console.log("Errore del server: " + response.status);
+      }
+    }
+
+    return result;
+  });
 }
 
-function openGame(gameId, username, role) {
-  const params = new URLSearchParams({ id: gameId, nome: username, role });
-  window.location.href = `partita.html?${params}`;
+function openGame(gameId, username, role) { //questo apre la pagina con le robe
+  const paginaPartita = "partita.html?id=" + gameId + "&nome=" + username + "&role=" + role;
+  window.location.href = paginaPartita;
 }
 
 function playerCount(game) {
-  return [game.PLAYER1, game.PLAYER2, game.PLAYER3, game.PLAYER4]
-    .filter((player) => typeof player === "string" && player.length > 0).length;
+  let count = 0;
+
+  if (game.PLAYER1) count++;
+  if (game.PLAYER2) count++;
+  if (game.PLAYER3) count++;
+  if (game.PLAYER4) count++;
+
+  return count;
 }
 
-async function iniziaGioco() {
-  const username = getUsername();
-  if (!username) return;
+function createGame(username) { // questo crea effettivamente la partita e returna id
+  const indirizzo = "https://classe5ID.altervista.org/games/partita/" + username;
 
-  setBusy(true);
-  try {
-    const url = `https://classe5ID.altervista.org/games/partita/${encodeURIComponent(username)}`;
-    const result = await readResponse(await fetch(url, requestOptionsPost));
-    const gameId = result.data?.id ?? result.data?.ID;
-    if (gameId === undefined || gameId === null) {
-      throw new Error("Il server non ha restituito l'ID della partita.");
-    }
-    openGame(gameId, username, "player");
-  } catch (error) {
-    message.textContent = error.message || "Impossibile creare la partita.";
-  } finally {
-    setBusy(false);
-  }
-}
+  return fetch(indirizzo, requestOptionsPost)
+    .then(readResponse)
+    .then(function(result) {
+      let gameId = "";
 
-async function joinGioco() {
-  const username = getUsername();
-  if (!username) return;
-
-  setBusy(true);
-  try {
-    let gameId = gameIdInput.value.trim();
-    if (!gameId) {
-      const endpoints = ["partita", "partitaN/2", "partitaN/3", "partitaN/4"];
-      const responses = await Promise.all(endpoints.map(async (endpoint) => {
-        try {
-          return await readResponse(
-            await fetch(`https://classe5ID.altervista.org/games/${endpoint}`, requestOptionsGet)
-          );
-        } catch {
-          return null;
+      if (result.data) {
+        if (result.data.id) {
+          gameId = result.data.id;
+        } else if (result.data.ID) {
+          gameId = result.data.ID;
         }
-      }));
-
-      if (responses.every((response) => response === null)) {
-        throw new Error("Impossibile cercare partite disponibili.");
       }
 
-      const roomsById = new Map();
-      responses.flatMap((response) => Array.isArray(response?.data) ? response.data : [])
-        .forEach((room) => {
-          const roomId = room.ID ?? room.id;
-          if (!roomId || !room.PLAYER1?.startsWith("domino") || playerCount(room) >= 4) return;
-          const current = roomsById.get(String(roomId));
-          if (!current || playerCount(room) > playerCount(current)) {
-            roomsById.set(String(roomId), room);
-          }
-        });
+      if (gameId === "") {
+        console.log("Il server non ha restituito l'ID della partita.");
+        return null;
+      }
 
-      const room = [...roomsById.values()]
-        .sort((first, second) => playerCount(second) - playerCount(first))[0];
+      return gameId;
+    });
+}
 
-      if (room) {
-        gameId = room.ID ?? room.id;
-      } else {
-        const url = `https://classe5ID.altervista.org/games/partita/${encodeURIComponent(username)}`;
-        const created = await readResponse(await fetch(url, requestOptionsPost));
-        gameId = created.data?.id ?? created.data?.ID;
-        if (gameId === undefined || gameId === null) {
-          throw new Error("Il server non ha restituito l'ID della partita.");
-        }
+function iniziaGioco() { // questo crea partita e apre page
+  const username = getUsername();
+
+  if (username === "") {
+    return;
+  }
+
+  setBusy(true);
+
+  createGame(username)
+    .then(function(gameId) {
+      if (gameId !== null) {
         openGame(gameId, username, "player");
+      }
+      setBusy(false);
+    })
+    .catch(function(error) {
+      setBusy(false);
+      console.log(error);
+      message.textContent = "Impossibile creare la partita.";
+    });
+}
+
+function findGame() {
+  const indirizzo = "https://classe5ID.altervista.org/games/partita";
+
+  return fetch(indirizzo, requestOptionsGet)
+    .then(readResponse)
+    .then(function(result) {
+      if (!result.data || !Array.isArray(result.data)) {
+        return null;
+      }
+
+      let stanzaTrovata = null;
+
+      result.data.forEach(function(room) {
+        const roomId = room.ID;
+        const firstPlayer = room.PLAYER1 || "";
+
+        if (stanzaTrovata === null && roomId && typeof firstPlayer === "string" && firstPlayer.indexOf("domino") === 0 && playerCount(room) < 4) {
+          stanzaTrovata = room;
+        }
+      });
+
+      return stanzaTrovata;
+    })
+    .catch(function(error) {
+      console.log(error);
+      return false;
+    });
+}
+
+function joinGioco() {
+  const username = getUsername();
+
+  if (username === "") {
+    return;
+  }
+
+  setBusy(true);
+
+  let gameId = gameIdInput.value.trim();
+
+  if (gameId !== "") {
+    openGame(gameId, username, "join");
+    setBusy(false);
+    return;
+  }
+
+  findGame()
+    .then(function(room) {
+      if (room === false) {
+        setBusy(false);
         return;
       }
-    }
 
-    if (gameId === undefined || gameId === null || gameId === "") {
-      throw new Error("Inserisci un ID valido.");
-    }
-    openGame(gameId, username, "join");
-  } catch (error) {
-    message.textContent = error.message || "Impossibile raggiungere il server.";
-  } finally {
-    setBusy(false);
-  }
+      if (room === null) {
+        return createGame(username).then(function(newGameId) {
+          if (newGameId !== null) {
+            openGame(newGameId, username, "player");
+          }
+          setBusy(false);
+        });
+      }
+
+      gameId = room.ID;
+      openGame(gameId, username, "join");
+      setBusy(false);
+    })
+    .catch(function(error) {
+      setBusy(false);
+      message.textContent = error.message || error || "Impossibile raggiungere il server.";
+    });
 }

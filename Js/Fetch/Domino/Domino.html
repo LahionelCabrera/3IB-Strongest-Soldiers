@@ -4,21 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Domino</title>
   </head>
   <body>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- Template della tessera completa -->
     <template id="domino">
@@ -98,10 +85,10 @@
         <p>Scegli un nome per iniziare.</p>
 
         <label for="username">Nome</label>
-        <input id="username" type="text" placeholder="Il tuo nome" maxlength="24" autocomplete="nickname" />
+        <input id="username" type="text" placeholder="Tuo nome">
         <button id="gioca" type="button" onclick="iniziaGioco()">Gioca</button>
 
-        <label for="id">ID partita (facoltativo)</label>
+        <label for="id">ID partita (se vuoi)</label>
         <div class="riga-join">
           <input id="id" type="text" placeholder="ID partita" autocomplete="off" />
           <button id="join" type="button" onclick="joinGioco()">Join</button>

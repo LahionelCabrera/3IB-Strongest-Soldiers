@@ -133,7 +133,6 @@ body {
 body {
   color: #f4f0e5;
   background-color: #124a3d;
-  background-image: repeating-linear-gradient(32deg, transparent 0 34px, rgb(255 255 255 / 2.5%) 35px 36px);
   font-family: "Trebuchet MS", "Avenir Next", sans-serif;
 }
 
