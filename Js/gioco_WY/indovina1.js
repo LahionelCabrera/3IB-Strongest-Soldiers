@@ -735,6 +735,8 @@ else {
       mossa.domanda = "";
     });
     
+    //URLSearchParams è un oggetto JavaScript che serve a leggere, creare,
+    //modificare e gestire i parametri di una URL
     const params = new URLSearchParams(window.location.search);
     const nome = (params.get("nome") || "").trim();
     id_partita = params.get("id");
@@ -745,6 +747,8 @@ else {
       return;
     }
 
+    //dificare una stringa in modo che possa 
+    //essere inserita correttamente all'interno di una URL.
     utente = pref_ut + encodeURIComponent(nome);   // codificato: serve per gli URL dell'API
     const utenteDec = pref_ut + nome;              // NON codificato: serve per i confronti con PLAYER
 

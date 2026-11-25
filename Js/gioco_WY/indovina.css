@@ -2,7 +2,7 @@
    CONFIGURAZIONE GENERALE & LAYOUT
    ========================================== */
 body {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #9abdf0 0%, #c3cfe2 100%);
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2c3e50;
@@ -36,7 +36,7 @@ h1 i {
 .card-personaggio {
   border: none !important;
   border-radius: 12px !important;
-  background-color: #ffffff;
+  background-color: #d0f7f8;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
